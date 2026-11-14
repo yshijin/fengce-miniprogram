@@ -1,0 +1,26 @@
+.page-title {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #17233d;
+}
+
+.page-sub {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: #8b97ad;
+}
+
+.paper-data {
+  padding: 18rpx 0 4rpx;
+  border-top: 1rpx solid #edf1f7;
+}
+
+.paper-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+}
+
+.paper-actions .btn + .btn {
+  margin-left: 12rpx;
+}

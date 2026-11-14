@@ -1,0 +1,61 @@
+<view class="login-page">
+  <view class="login-orb login-orb-a"></view>
+  <view class="login-orb login-orb-b"></view>
+
+  <view class="brand">
+    <view class="brand-mark">智</view>
+    <view class="brand-title">智学测评</view>
+    <view class="brand-sub">微信小程序版 · 保留现有 Web 版</view>
+  </view>
+
+  <view class="login-card">
+    <view class="login-head">账号登录</view>
+    <view class="login-desc">学生、教师、课程负责人使用同一套账号</view>
+
+    <view class="login-field">
+      <view class="login-field-label">账号</view>
+      <input class="login-input"
+             value="{{username}}"
+             data-field="username"
+             placeholder="请输入学号 / 工号 / 账号"
+             placeholder-class="login-placeholder"
+             confirm-type="next"
+             bindinput="onInput" />
+    </view>
+
+    <view class="login-field">
+      <view class="login-field-label">密码</view>
+      <input class="login-input"
+             value="{{password}}"
+             password="{{true}}"
+             data-field="password"
+             placeholder="请输入密码"
+             placeholder-class="login-placeholder"
+             confirm-type="done"
+             bindinput="onInput"
+             bindconfirm="submit" />
+    </view>
+
+    <button class="login-btn" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">
+      {{loading ? '正在登录…' : '进入系统'}}
+    </button>
+
+    <view class="quick-title">测试账号（点击填入）</view>
+    <view class="quick-row">
+      <view class="quick-account"
+            wx:for="{{quickAccounts}}"
+            wx:key="username"
+            data-index="{{index}}"
+            bindtap="fillAccount">
+        <view class="quick-role">{{item.role}}</view>
+        <view class="quick-user">{{item.username}}</view>
+      </view>
+    </view>
+
+    <view class="login-tip">
+      小程序端使用 Bearer Token 登录；Web 端继续使用原有 HttpSession，两者互不影响。
+    </view>
+  </view>
+
+  <view class="login-footer">{{version}}</view>
+</view>

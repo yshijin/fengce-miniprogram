@@ -1,0 +1,92 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <class-switcher classes="{{classes}}" current="{{currentClassId}}" bind:change="onClassChange"></class-switcher>
+
+  <view class="row-between mb-20">
+    <view>
+      <view class="page-title">学生管理</view>
+      <view class="page-sub">{{currentClassName}} · 共 {{totalCount}} 人</view>
+    </view>
+    <button class="btn btn-primary btn-sm" bindtap="openAdd">添加学生</button>
+  </view>
+
+  <view class="search-box">
+    <text class="search-icon">⌕</text>
+    <input class="search-input"
+           value="{{keyword}}"
+           placeholder="搜索姓名、学号或行政班"
+           placeholder-class="muted"
+           bindinput="onSearch" />
+    <text class="small muted" wx:if="{{keyword}}" bindtap="clearSearch">清除</text>
+  </view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在加载学生…</view>
+
+  <block wx:else>
+    <view class="student-card" wx:for="{{students}}" wx:key="id">
+      <view class="avatar">{{item.initial}}</view>
+      <view class="flex-1">
+        <view class="row-between">
+          <view class="student-name">{{item.name}}</view>
+          <text class="pill pill-green">{{item.status}}</text>
+        </view>
+        <view class="student-meta">学号 {{item.no}} · {{item.className}}</view>
+        <view class="student-meta">行政班 {{item.adminClass}} · {{item.major}}</view>
+        <view class="student-stats">
+          <text>已交卷 {{item.attemptCount}} 次</text>
+          <text wx:if="{{item.attemptCount}}">平均 {{item.avg}}%</text>
+          <text>最近 {{item.lastActive}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!students.length}}">
+      <view class="empty-icon">生</view>
+      <view>{{keyword ? '没有匹配的学生' : '当前教学班还没有学生'}}</view>
+      <button class="btn btn-primary btn-sm mt-20" wx:if="{{!keyword}}" bindtap="openAdd">添加学生</button>
+    </view>
+  </block>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+
+<view class="modal-mask" wx:if="{{showAdd}}" bindtap="closeAdd"></view>
+<view class="modal" wx:if="{{showAdd}}">
+  <view class="row-between mb-20">
+    <view class="modal-title">添加学生</view>
+    <view class="modal-close" bindtap="closeAdd">×</view>
+  </view>
+  <view class="form-item">
+    <view class="form-label">教学班</view>
+    <picker mode="selector" range="{{classNames}}" value="{{classIndex}}" bindchange="onClassPick">
+      <view class="picker-field">
+        <text>{{classNames[classIndex] || '请选择教学班'}}</text>
+        <text class="muted">›</text>
+      </view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <view class="form-label">学号</view>
+    <input class="field" value="{{form.no}}" data-field="no" placeholder="例如 20260002" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">姓名</view>
+    <input class="field" value="{{form.name}}" data-field="name" placeholder="请输入学生姓名" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">行政班</view>
+    <input class="field" value="{{form.adminClass}}" data-field="adminClass" placeholder="默认与教学班同名" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">专业</view>
+    <input class="field" value="{{form.major}}" data-field="major" placeholder="例如 软件工程" bindinput="onFormInput" />
+  </view>
+  <view class="hint-box">小程序端提供单个添加；批量导入、下载模板请继续使用 Web 版。</view>
+  <button class="btn btn-primary btn-block mt-20" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submitAdd">确认添加</button>
+</view>
+
+<bottom-nav role="teacher" active="/pages/teacher/students/students"></bottom-nav>

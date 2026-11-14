@@ -1,0 +1,44 @@
+.kp-scroll {
+  height: 360rpx;
+  padding: 4rpx 0;
+}
+
+.count-box {
+  padding: 16rpx 18rpx;
+  margin-bottom: 12rpx;
+  border-radius: 18rpx;
+  background: #f7f9fd;
+}
+
+.count-name {
+  font-size: 25rpx;
+  font-weight: 600;
+  color: #3d4b63;
+}
+
+.field-short {
+  width: 150rpx;
+  text-align: center;
+}
+
+.create-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 24rpx 12rpx;
+  margin: 24rpx 0;
+  border-radius: 22rpx;
+  background: #f7f9fd;
+  text-align: center;
+}
+
+.summary-value {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #215bd1;
+}
+
+.summary-label {
+  margin-top: 3rpx;
+  font-size: 20rpx;
+  color: #8b97ad;
+}

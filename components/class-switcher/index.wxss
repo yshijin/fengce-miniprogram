@@ -1,0 +1,49 @@
+.cs-wrap {
+  margin-bottom: 20rpx;
+}
+
+.cs-label {
+  margin: 0 4rpx 10rpx;
+  font-size: 22rpx;
+  color: #7b8aa6;
+}
+
+.cs-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.cs-chip {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 12rpx;
+  padding: 13rpx 20rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: #56637b;
+  background: #ffffff;
+  border: 1rpx solid #e3ebf7;
+}
+
+.cs-chip.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f6fed, #1857b8);
+  border-color: #2f6fed;
+  box-shadow: 0 8rpx 18rpx rgba(47, 111, 237, 0.18);
+}
+
+.cs-count {
+  min-width: 34rpx;
+  margin-left: 8rpx;
+  padding: 1rpx 8rpx;
+  border-radius: 999rpx;
+  text-align: center;
+  font-size: 19rpx;
+  color: #7b8aa6;
+  background: #f1f4f9;
+}
+
+.cs-chip.active .cs-count {
+  color: #215bd1;
+  background: rgba(255, 255, 255, 0.9);
+}

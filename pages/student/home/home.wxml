@@ -1,0 +1,93 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <view class="hero">
+    <view class="hero-tag">{{className || '我的教学班'}}</view>
+    <view class="hero-title">{{greeting}}，{{user.name}}</view>
+    <view class="hero-sub">完成教师发布的测评，系统会生成知识点诊断与学习建议。</view>
+    <view class="hero-row">
+      <view>
+        <view class="hero-number">{{stats.pending}}</view>
+        <view class="hero-label">待完成测评</view>
+      </view>
+      <view>
+        <view class="hero-number">{{stats.completed}}</view>
+        <view class="hero-label">已完成</view>
+      </view>
+      <view>
+        <view class="hero-number">{{stats.avg}}<text style="font-size:24rpx">%</text></view>
+        <view class="hero-label">平均得分率</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="student-links">
+    <view class="student-link" bindtap="goHistory">
+      <view class="student-link-icon">绩</view>
+      <view>
+        <view class="student-link-title">历史成绩</view>
+        <view class="student-link-sub">查看每次测评结果</view>
+      </view>
+    </view>
+    <view class="student-link" bindtap="goWrongbook">
+      <view class="student-link-icon green">错</view>
+      <view>
+        <view class="student-link-title">错题本</view>
+        <view class="student-link-sub">按知识点重练错题</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+
+  <view class="loading" wx:elif="{{loading}}">正在加载测评…</view>
+
+  <block wx:else>
+    <block wx:for="{{sections}}" wx:key="key">
+      <block wx:if="{{item.items.length}}">
+        <view class="section-title">
+          <text>{{item.title}}</text>
+          <text class="more">{{item.items.length}} 场</text>
+        </view>
+        <view class="paper-card"
+              wx:for="{{item.items}}"
+              wx:for-item="paper"
+              wx:key="id"
+              data-action="{{paper.action}}"
+              data-id="{{paper.id}}"
+              data-attempt="{{paper.attemptId}}"
+              bindtap="onPaperTap">
+          <view class="paper-status">
+            <text class="pill pill-{{paper.statusTone}}">{{paper.statusLabel}}</text>
+          </view>
+          <view class="paper-name">{{paper.name}}</view>
+          <view class="paper-meta">{{paper.teacherName}} · {{paper.className}} · {{paper.questionCount}} 题 · 满分 {{paper.total}}</view>
+          <view class="paper-bottom">
+            <view class="paper-time">{{paper.timeText}}</view>
+            <view class="row">
+              <view class="score-inline" wx:if="{{paper.scoreText}}">{{paper.scoreText}}<text style="font-size:22rpx;color:#7b8aa6"> 分</text></view>
+              <view class="paper-action" wx:if="{{paper.action !== 'wait'}}">{{paper.actionLabel}}</view>
+              <view class="paper-action muted" wx:else>{{paper.actionLabel}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+
+    <view class="empty" wx:if="{{!hasAny}}">
+      <view class="empty-icon">测</view>
+      <view>当前还没有面向你的测评</view>
+      <view class="small muted mt-8">教师发布后会自动出现在这里</view>
+    </view>
+    <view class="empty" wx:elif="{{!stats.pending && stats.completed}}">
+      <view class="empty-icon green">✓</view>
+      <view>进行中的测评已全部完成</view>
+      <view class="small muted mt-8">可以查看历史成绩或错题本继续巩固</view>
+    </view>
+  </block>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+<bottom-nav role="student" active="/pages/student/home/home"></bottom-nav>

@@ -1,0 +1,102 @@
+<view class="page with-nav">
+  <view class="hero" wx:if="{{user}}">
+    <view class="hero-tag">错题本 · 按知识点重练</view>
+    <view class="hero-title">把错题变成得分点</view>
+    <view class="hero-sub">从真实作答中自动收集错题，支持选择题目生成个人重练测试。</view>
+    <view class="hero-row">
+      <view>
+        <view class="hero-number">{{summary.remaining}}</view>
+        <view class="hero-label">待掌握</view>
+      </view>
+      <view>
+        <view class="hero-number">{{summary.corrected}}</view>
+        <view class="hero-label">已纠正</view>
+      </view>
+      <view>
+        <view class="hero-number">{{summary.total}}</view>
+        <view class="hero-label">错题总数</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在整理错题…</view>
+
+  <block wx:else>
+    <scroll-view class="tab-row" scroll-x="{{true}}">
+      <view class="tab-item {{filter === item.key ? 'active' : ''}}"
+            wx:for="{{tabs}}"
+            wx:key="key"
+            data-filter="{{item.key}}"
+            bindtap="setFilter">{{item.label}} {{item.count}}</view>
+    </scroll-view>
+
+    <view class="select-bar">
+      <view>
+        <view class="select-count">已选 {{selectedCount}} 题</view>
+        <view class="small muted">单次最多 100 题</view>
+      </view>
+      <view class="row">
+        <button class="btn btn-ghost btn-sm" bindtap="selectAll">{{allSelected ? '取消全选' : '全选'}}</button>
+        <button class="btn btn-primary btn-sm" loading="{{generating}}" disabled="{{generating}}" bindtap="generate">生成重练</button>
+      </view>
+    </view>
+
+    <view class="wrong-card"
+          wx:for="{{entries}}"
+          wx:key="qid"
+          data-qid="{{item.qid}}"
+          bindtap="toggleExpand">
+      <view class="wrong-head">
+        <view class="select-dot {{item.selected ? 'active' : ''}}"
+              data-qid="{{item.qid}}"
+              catchtap="toggleSelect">{{item.selected ? '✓' : ''}}</view>
+        <view class="flex-1">
+          <view class="row">
+            <text class="pill pill-blue">{{item.typeLabel}}</text>
+            <text class="small muted" style="margin-left: 12rpx">{{item.kpName}}</text>
+          </view>
+          <view class="wrong-stem">{{item.stem}}</view>
+        </view>
+        <view class="pill {{item.corrected ? 'pill-green' : 'pill-red'}}">{{item.corrected ? '已纠正' : '待掌握'}}</view>
+      </view>
+
+      <view class="wrong-meta">
+        <text>错 {{item.wrongCount || 1}} 次</text>
+        <text wx:if="{{item.sourcePaperName}}"> · 来自「{{item.sourcePaperName}}」</text>
+        <text class="text-blue" style="margin-left: 12rpx">{{item.expanded ? '收起' : '查看答案'}}</text>
+      </view>
+
+      <view class="wrong-detail" wx:if="{{item.expanded}}">
+        <view class="mt-16">
+          <view class="answer-option {{opt.state}}"
+                wx:for="{{item.options}}"
+                wx:for-item="opt"
+                wx:key="key">
+            <view class="option-key">{{opt.key}}</view>
+            <view class="option-text">{{opt.text}}</view>
+          </view>
+        </view>
+        <view class="answer-summary">
+          <view class="small">我的答案：<text class="bold">{{item.myAnswerText}}</text></view>
+          <view class="small mt-8" wx:if="{{item.answerVisible}}">正确答案：<text class="bold text-green">{{item.correctAnswerText}}</text></view>
+        </view>
+        <view class="analysis" wx:if="{{item.answerVisible && item.analysis}}">
+          <text class="analysis-label">解析：</text>{{item.analysis}}
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!entries.length}}">
+      <view class="empty-icon">✓</view>
+      <view>{{filter === 'corrected' ? '还没有已纠正的错题' : (filter === 'remaining' ? '当前没有待掌握错题' : '错题本还是空的')}}</view>
+      <view class="small muted mt-8">完成测评后，错题会自动收录</view>
+    </view>
+  </block>
+</view>
+
+<bottom-nav role="student" active="/pages/student/wrongbook/wrongbook"></bottom-nav>

@@ -1,0 +1,75 @@
+.select-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 22rpx;
+  margin-bottom: 18rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.05);
+}
+
+.select-count {
+  font-size: 27rpx;
+  font-weight: 700;
+  color: #26344d;
+}
+
+.wrong-card {
+  padding: 24rpx;
+  margin-bottom: 18rpx;
+  border-radius: 26rpx;
+  background: #ffffff;
+  box-shadow: 0 8rpx 26rpx rgba(25, 50, 90, 0.055);
+}
+
+.wrong-head {
+  display: flex;
+  align-items: flex-start;
+}
+
+.select-dot {
+  flex: none;
+  width: 44rpx;
+  height: 44rpx;
+  margin: 2rpx 18rpx 0 0;
+  border-radius: 14rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: transparent;
+  background: #f1f4f9;
+  border: 2rpx solid #dce6f5;
+}
+
+.select-dot.active {
+  color: #ffffff;
+  background: #2f6fed;
+  border-color: #2f6fed;
+}
+
+.wrong-stem {
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.wrong-meta {
+  margin: 14rpx 0 0 62rpx;
+  font-size: 21rpx;
+  color: #8b97ad;
+}
+
+.wrong-detail {
+  margin-left: 62rpx;
+}
+
+.answer-summary {
+  margin-top: 16rpx;
+  padding: 16rpx 18rpx;
+  border-radius: 16rpx;
+  color: #56637b;
+  background: #f7f9fd;
+}

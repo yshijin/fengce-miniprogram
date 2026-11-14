@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/student/home/home",
+    "pages/student/exam/exam",
+    "pages/student/result/result",
+    "pages/student/history/history",
+    "pages/student/wrongbook/wrongbook",
+    "pages/teacher/home/home",
+    "pages/teacher/students/students",
+    "pages/teacher/papers/papers",
+    "pages/teacher/create/create",
+    "pages/teacher/progress/progress",
+    "pages/teacher/data/data",
+    "pages/cl/home/home",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "navigationBarTitleText": "智学测评",
+    "navigationBarBackgroundColor": "#0b2a55",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f3f6fb",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "class-switcher": "/components/class-switcher/index",
+    "bottom-nav": "/components/bottom-nav/index"
+  }
+}

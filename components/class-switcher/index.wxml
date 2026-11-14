@@ -1,0 +1,13 @@
+<view class="cs-wrap" wx:if="{{classes.length}}">
+  <view class="cs-label">教学班</view>
+  <scroll-view class="cs-scroll" scroll-x="{{true}}">
+    <view class="cs-chip {{item.id === current ? 'active' : ''}}"
+          wx:for="{{classes}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="change">
+      <text>{{item.name}}</text>
+      <text class="cs-count">{{item.count || 0}}</text>
+    </view>
+  </scroll-view>
+</view>

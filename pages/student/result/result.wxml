@@ -1,0 +1,116 @@
+<view class="loading" wx:if="{{loading}}">正在生成测评报告…</view>
+
+<view class="page" wx:elif="{{error}}">
+  <view class="card center">
+    <view class="empty-icon">!</view>
+    <view class="bold">{{error}}</view>
+    <button class="btn btn-soft mt-28" bindtap="retry">重新加载</button>
+  </view>
+</view>
+
+<view class="page" wx:else>
+  <view class="result-hero">
+    <view class="result-label">{{mode === 'teacher' ? '学生测评得分' : '我的测评得分'}}</view>
+    <view class="result-score">{{attempt.score}}<text class="result-score-total"> / {{attempt.total}}</text></view>
+    <view class="result-label">{{paper.name}}</view>
+    <view class="result-badge">{{grade}} · 得分率 {{scoreRate}}%</view>
+    <view class="result-student" wx:if="{{mode === 'teacher' && student}}">
+      {{student.name}} · {{student.no}} · {{paperClass}}
+    </view>
+  </view>
+
+  <view class="stat-grid mt-20">
+    <view class="stat">
+      <view class="stat-value text-green">{{correctCount}} / {{totalCount}}</view>
+      <view class="stat-label">正确题数</view>
+    </view>
+    <view class="stat">
+      <view class="stat-value">{{timeText}}</view>
+      <view class="stat-label">作答用时</view>
+    </view>
+    <view class="stat">
+      <view class="stat-value">{{scoreRate}}%</view>
+      <view class="stat-label">得分率</view>
+    </view>
+    <view class="stat">
+      <view class="stat-value" style="font-size: 25rpx">{{submittedText}}</view>
+      <view class="stat-label">提交时间</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{inProgress}}">
+    <view class="bold">本次作答尚未提交</view>
+    <view class="small muted mt-8">如果这是你的作答，可以继续完成并交卷。</view>
+    <button class="btn btn-primary btn-block mt-20" wx:if="{{mode === 'student'}}" bindtap="continueExam">继续作答</button>
+  </view>
+
+  <view class="card" wx:if="{{kpStats.length}}">
+    <view class="row-between">
+      <view class="bold">知识点诊断</view>
+      <view class="small muted">按掌握率从低到高</view>
+    </view>
+    <view class="kp-row" wx:for="{{kpStats}}" wx:key="kpId">
+      <view class="kp-name ellipsis">{{item.name}}</view>
+      <view class="kp-bar">
+        <view class="progress">
+          <view class="progress-inner" style="width: {{item.barWidth}}%; background: {{item.color}}"></view>
+        </view>
+      </view>
+      <view class="kp-rate" style="color: {{item.color}}">{{item.rate}}%</view>
+    </view>
+  </view>
+
+  <view class="section-title">
+    <text>答题回顾</text>
+    <text class="more">{{policyText}}</text>
+  </view>
+
+  <view class="hint-box" wx:if="{{!canShowAnswer}}">
+    本试卷未开放答案查看，当前仅展示你的作答记录。
+  </view>
+
+  <block wx:for="{{reviews}}" wx:key="id">
+    <view class="review-card {{item.isCorrect ? '' : 'wrong'}}">
+      <view class="review-head">
+        <view class="row">
+          <text class="question-index">第 {{item.number}} 题</text>
+          <text class="pill pill-blue" style="margin-left: 12rpx">{{item.typeLabel}}</text>
+        </view>
+        <text class="pill {{item.isCorrect ? 'pill-green' : 'pill-red'}}">{{item.isCorrect ? '正确' : '错误'}}</text>
+      </view>
+      <view class="review-stem">{{item.stem}}</view>
+      <view class="mt-16">
+        <view class="answer-option {{opt.state}}"
+              wx:for="{{item.options}}"
+              wx:for-item="opt"
+              wx:key="key">
+          <view class="option-key">{{opt.key}}</view>
+          <view class="option-text">{{opt.text}}</view>
+        </view>
+      </view>
+      <view class="review-answer">
+        <view class="small">我的答案：<text class="bold">{{item.myAnswerText}}</text></view>
+        <view class="small mt-8" wx:if="{{canShowAnswer}}">正确答案：<text class="bold text-green">{{item.correctAnswerText}}</text></view>
+      </view>
+      <view class="analysis" wx:if="{{canShowAnswer && item.analysis}}">
+        <text class="analysis-label">解析：</text>{{item.analysis}}
+      </view>
+    </view>
+  </block>
+
+  <view class="card center" wx:if="{{!reviews.length && canShowAnswer && totalCount}}">
+    <view class="small muted">暂无答题回顾</view>
+  </view>
+
+  <button class="btn btn-ghost btn-block mt-20" wx:if="{{hasMore}}" bindtap="toggleAll">
+    {{toggleLabel}}
+  </button>
+
+  <view class="btn-row mt-28">
+    <button class="btn btn-ghost" wx:if="{{mode === 'teacher'}}" bindtap="goBack">返回数据页</button>
+    <block wx:else>
+      <button class="btn btn-ghost" bindtap="goWrongbook">错题本</button>
+      <button class="btn btn-primary" bindtap="goHome">返回首页</button>
+    </block>
+  </view>
+</view>

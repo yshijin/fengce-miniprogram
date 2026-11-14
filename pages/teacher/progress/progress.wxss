@@ -1,0 +1,60 @@
+.progress-hero {
+  padding: 30rpx 28rpx;
+  border-radius: 30rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0a2854, #1858a8 62%, #0b7f83);
+}
+
+.progress-hero .hero-tag {
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.report-row {
+  display: flex;
+  align-items: center;
+  padding: 22rpx;
+  margin-bottom: 14rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.045);
+}
+
+.report-name {
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.report-meta {
+  margin-top: 3rpx;
+  font-size: 20rpx;
+  color: #8b97ad;
+}
+
+.report-score {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+  font-size: 20rpx;
+  color: #8b97ad;
+}
+
+.score-strong {
+  margin-right: 16rpx;
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #215bd1;
+}
+
+.report-row .avatar-amber {
+  color: #a65c00;
+  background: #fff4df;
+}
+
+.history-arrow {
+  flex: none;
+  margin-left: 10rpx;
+  font-size: 36rpx;
+  color: #c2cbd9;
+}

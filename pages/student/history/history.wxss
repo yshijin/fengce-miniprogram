@@ -1,0 +1,66 @@
+.history-card {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  margin-bottom: 18rpx;
+  border-radius: 26rpx;
+  background: #ffffff;
+  box-shadow: 0 8rpx 26rpx rgba(25, 50, 90, 0.055);
+}
+
+.history-score {
+  flex: none;
+  width: 110rpx;
+  height: 110rpx;
+  margin-right: 22rpx;
+  border-radius: 24rpx;
+  text-align: center;
+  color: #215bd1;
+  background: #eaf1ff;
+}
+
+.history-score-value {
+  padding-top: 14rpx;
+  font-size: 40rpx;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.history-score-total {
+  font-size: 20rpx;
+  color: #7b8aa6;
+}
+
+.history-amber {
+  color: #a65c00;
+  background: #fff4df;
+}
+
+.history-red {
+  color: #c32d33;
+  background: #ffecec;
+}
+
+.history-green {
+  color: #087a58;
+  background: #e5f8f0;
+}
+
+.history-name {
+  font-size: 29rpx;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.history-meta {
+  margin-top: 6rpx;
+  font-size: 21rpx;
+  color: #8b97ad;
+}
+
+.history-arrow {
+  flex: none;
+  margin-left: 12rpx;
+  font-size: 38rpx;
+  color: #c2cbd9;
+}

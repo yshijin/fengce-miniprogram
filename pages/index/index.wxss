@@ -1,0 +1,26 @@
+.boot-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #0a2854 0%, #1858a8 58%, #0b7f83 100%);
+  color: #ffffff;
+}
+
+.boot-mark {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 34rpx;
+  line-height: 116rpx;
+  text-align: center;
+  font-size: 54rpx;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.boot-text {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.76);
+}

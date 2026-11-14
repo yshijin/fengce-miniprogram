@@ -1,0 +1,85 @@
+.page-title {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #17233d;
+}
+
+.page-sub {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: #8b97ad;
+}
+
+.overview-row {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #edf1f7;
+}
+
+.overview-row:last-child {
+  border-bottom: none;
+}
+
+.overview-name {
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.overview-right {
+  width: 116rpx;
+  text-align: right;
+}
+
+.overview-value {
+  font-size: 27rpx;
+  font-weight: 800;
+  color: #215bd1;
+}
+
+.paper-data {
+  padding-top: 14rpx;
+  border-top: 1rpx solid #edf1f7;
+}
+
+.paper-action-row {
+  margin-top: 16rpx;
+  text-align: right;
+  font-size: 22rpx;
+  color: #2f6fed;
+}
+
+.report-row {
+  display: flex;
+  align-items: center;
+  padding: 22rpx;
+  margin-bottom: 14rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.045);
+}
+
+.report-name {
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.report-meta {
+  margin-top: 3rpx;
+  font-size: 20rpx;
+  color: #8b97ad;
+}
+
+.score-strong {
+  margin-right: 16rpx;
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #215bd1;
+}
+
+.history-arrow {
+  flex: none;
+  margin-left: 10rpx;
+  font-size: 36rpx;
+  color: #c2cbd9;
+}

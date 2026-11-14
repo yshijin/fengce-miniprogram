@@ -1,0 +1,158 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <class-switcher classes="{{classes}}" current="{{currentClassId}}" bind:change="onClassChange"></class-switcher>
+
+  <view class="row-between mb-20">
+    <view>
+      <view class="page-title">数据分析</view>
+      <view class="page-sub">{{currentClassName}} · 真实作答数据</view>
+    </view>
+    <view class="pill pill-blue">{{stats.paperCount}} 份测评</view>
+  </view>
+
+  <scroll-view class="tab-row" scroll-x="{{true}}">
+    <view class="tab-item {{activeTab === 'overview' ? 'active' : ''}}" data-tab="overview" bindtap="setTab">班级概览</view>
+    <view class="tab-item {{activeTab === 'papers' ? 'active' : ''}}" data-tab="papers" bindtap="setTab">试卷数据</view>
+    <view class="tab-item {{activeTab === 'reports' ? 'active' : ''}}" data-tab="reports" bindtap="setTab">最近报告</view>
+  </scroll-view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在加载数据…</view>
+
+  <block wx:else>
+    <block wx:if="{{activeTab === 'overview'}}">
+      <view class="hero">
+        <view class="hero-tag">{{currentClassName}}</view>
+        <view class="hero-title">班级学习概览</view>
+        <view class="hero-sub">参与率按已交卷学生占比计算，平均分为各次测评得分率的平均值。</view>
+        <view class="hero-row">
+          <view>
+            <view class="hero-number">{{stats.studentCount}}</view>
+            <view class="hero-label">学生人数</view>
+          </view>
+          <view>
+            <view class="hero-number">{{stats.participation}}<text style="font-size:24rpx">%</text></view>
+            <view class="hero-label">参与率</view>
+          </view>
+          <view>
+            <view class="hero-number">{{stats.avg}}<text style="font-size:24rpx">%</text></view>
+            <view class="hero-label">平均得分率</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="stat-grid mt-20">
+        <view class="stat">
+          <view class="stat-value">{{stats.submittedCount}}</view>
+          <view class="stat-label">累计交卷</view>
+        </view>
+        <view class="stat">
+          <view class="stat-value text-amber">{{stats.pendingStudents}}</view>
+          <view class="stat-label">未完成</view>
+        </view>
+        <view class="stat">
+          <view class="stat-value text-blue">{{stats.paperCount}}</view>
+          <view class="stat-label">测评数量</view>
+        </view>
+        <view class="stat">
+          <view class="stat-value text-green">{{stats.participation}}%</view>
+          <view class="stat-label">完成度</view>
+        </view>
+      </view>
+
+      <view class="card">
+        <view class="row-between">
+          <view class="bold">薄弱知识点</view>
+          <view class="small muted">按正确率升序</view>
+        </view>
+        <view class="kp-row" wx:for="{{weakKps}}" wx:key="kpId">
+          <view class="kp-name ellipsis">{{item.name}}</view>
+          <view class="kp-bar">
+            <view class="progress">
+              <view class="progress-inner" style="width: {{item.barWidth}}%; background: {{item.color}}"></view>
+            </view>
+          </view>
+          <view class="kp-rate" style="color: {{item.color}}">{{item.rate}}%</view>
+        </view>
+        <view class="small muted mt-12" wx:if="{{!weakKps.length}}">暂未积累足够的作答数据</view>
+      </view>
+
+      <view class="card">
+        <view class="bold mb-12">教学班对比</view>
+        <view class="overview-row" wx:for="{{classOverview}}" wx:key="id" data-id="{{item.id}}" bindtap="switchClass">
+          <view class="flex-1">
+            <view class="row">
+              <text class="overview-name">{{item.name}}</text>
+              <text class="pill {{item.current ? 'pill-blue' : 'pill-gray'}}" style="margin-left: 10rpx">{{item.current ? '当前' : '切换'}}</text>
+            </view>
+            <view class="small muted mt-8">{{item.studentCount}} 人 · {{item.paperCount}} 份测评</view>
+          </view>
+          <view class="overview-right">
+            <view class="overview-value">{{item.participation}}%</view>
+            <view class="small muted">参与率</view>
+          </view>
+          <view class="overview-right">
+            <view class="overview-value">{{item.avg}}%</view>
+            <view class="small muted">均分率</view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <block wx:elif="{{activeTab === 'papers'}}">
+      <view class="paper-card" wx:for="{{papers}}" wx:key="id" data-id="{{item.id}}" bindtap="openPaper">
+        <view class="paper-status">
+          <text class="pill pill-{{item.statusTone}}">{{item.statusLabel}}</text>
+        </view>
+        <view class="paper-name">{{item.name}}</view>
+        <view class="paper-meta">{{item.questionCount}} 题 · 满分 {{item.total}} · {{item.timeText}}</view>
+        <view class="paper-data mt-16">
+          <view class="progress">
+            <view class="progress-inner" style="width: {{item.completion}}%"></view>
+          </view>
+          <view class="row-between mt-8">
+            <text class="small muted">已交卷 {{item.submitted}} / {{item.expected}} · {{item.completion}}%</text>
+            <text class="small muted">平均 {{item.avg}}%</text>
+          </view>
+        </view>
+        <view class="paper-action-row">查看学生明细 ›</view>
+      </view>
+      <view class="empty" wx:if="{{!papers.length}}">
+        <view class="empty-icon">数</view>
+        <view>当前教学班还没有测评数据</view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="report-row"
+            wx:for="{{reports}}"
+            wx:key="id"
+            data-id="{{item.id}}"
+            bindtap="openReport">
+        <view class="avatar">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="report-name">{{item.studentName}} <text class="small muted">{{item.studentNo}}</text></view>
+            <text class="pill pill-{{item.tone}}">{{item.grade}}</text>
+          </view>
+          <view class="report-meta ellipsis">{{item.paperName}} · {{item.submittedText}}</view>
+          <view class="row mt-8">
+            <text class="score-strong">{{item.score}}<text class="small muted"> / {{item.total}}</text></text>
+            <text class="small muted">得分率 {{item.rate}}%</text>
+          </view>
+        </view>
+        <view class="history-arrow">›</view>
+      </view>
+      <view class="empty" wx:if="{{!reports.length}}">
+        <view class="empty-icon">报</view>
+        <view>还没有已提交的测评报告</view>
+      </view>
+    </block>
+  </block>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+<bottom-nav role="teacher" active="/pages/teacher/data/data"></bottom-nav>

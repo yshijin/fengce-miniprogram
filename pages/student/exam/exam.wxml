@@ -1,0 +1,78 @@
+<view class="loading" wx:if="{{loading}}">正在准备试卷…</view>
+
+<view class="page" wx:elif="{{error}}">
+  <view class="card center">
+    <view class="empty-icon">!</view>
+    <view class="bold">{{error}}</view>
+    <button class="btn btn-primary mt-28" wx:if="{{canRetrySubmit}}" loading="{{submitting}}" disabled="{{submitting}}" bindtap="retrySubmit">重新交卷</button>
+    <button class="btn btn-soft mt-20" bindtap="exit">返回我的测试</button>
+  </view>
+</view>
+
+<block wx:elif="{{paper && current}}">
+  <view class="exam-header">
+    <view class="exam-topline">
+      <view class="exam-top-link" bindtap="exit">退出</view>
+      <view class="exam-timer {{timerDanger ? 'danger' : ''}}">{{remainingText}}</view>
+    </view>
+    <view class="exam-title">{{paper.name}}</view>
+    <view class="exam-sub">{{paper.teacherName}} · {{totalCount}} 题 · 满分 {{paper.total}} 分 · {{paper.duration}} 分钟</view>
+    <view class="exam-progress">
+      <view class="exam-progress-inner" style="width: {{progressWidth}}%"></view>
+    </view>
+    <view class="exam-progress-label">已作答 {{answeredCount}} / {{totalCount}}</view>
+  </view>
+
+  <view class="exam-body">
+    <view class="row-between mb-12">
+      <view class="question-index">第 {{current.number}} 题</view>
+      <view class="row">
+        <text class="pill pill-blue">{{current.typeLabel}}</text>
+        <text class="small muted" style="margin-left: 12rpx">{{current.score}} 分</text>
+      </view>
+    </view>
+
+    <view class="question-card">
+      <view class="question-stem">{{current.stem}}</view>
+      <view class="answer-option {{opt.selected ? 'selected' : ''}}"
+            wx:for="{{current.options}}"
+            wx:for-item="opt"
+            wx:key="key"
+            data-key="{{opt.key}}"
+            bindtap="onSelect">
+        <view class="option-key">{{opt.key}}</view>
+        <view class="option-text">{{opt.text}}</view>
+      </view>
+      <view class="question-hint" wx:if="{{current.type === 'multi'}}">多选题，可选择多个选项</view>
+    </view>
+
+    <view class="exam-question-actions">
+      <button class="btn btn-ghost" bindtap="onPrev" disabled="{{currentIndex === 0}}">上一题</button>
+      <button class="btn btn-ghost" bindtap="onNext" disabled="{{currentIndex === totalCount - 1}}">下一题</button>
+    </view>
+
+    <view class="save-state">{{savingText || '答案会自动保存'}}</view>
+  </view>
+
+  <view class="exam-footer">
+    <button class="btn btn-ghost" bindtap="toggleCard">答题卡 {{answeredCount}}/{{totalCount}}</button>
+    <button class="btn btn-primary" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submit">交卷</button>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showCard}}" bindtap="toggleCard"></view>
+  <view class="popup" wx:if="{{showCard}}">
+    <view class="row-between">
+      <view class="popup-title">答题卡</view>
+      <view class="modal-close" bindtap="toggleCard">×</view>
+    </view>
+    <view class="small muted mt-8">已作答 {{answeredCount}} / {{totalCount}} 题，点击题号跳转</view>
+    <view class="q-grid mt-20">
+      <view class="q-cell {{item.answered ? 'answered' : ''}} {{index === currentIndex ? 'current' : ''}}"
+            wx:for="{{questions}}"
+            wx:key="id"
+            data-index="{{index}}"
+            bindtap="goQuestion">{{index + 1}}</view>
+    </view>
+    <button class="btn btn-primary btn-block mt-28" bindtap="toggleCard">继续作答</button>
+  </view>
+</block>

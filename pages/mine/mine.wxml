@@ -1,0 +1,63 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <view class="profile-hero">
+    <view class="profile-avatar">{{initial}}</view>
+    <view class="flex-1">
+      <view class="profile-name">{{user.name}}</view>
+      <view class="profile-sub">{{roleName}} · {{user.username}}</view>
+      <view class="profile-tag">Token 登录 · 7 天有效</view>
+    </view>
+  </view>
+
+  <view class="stat-grid mt-20">
+    <view class="stat" wx:for="{{stats}}" wx:key="label">
+      <view class="stat-value text-{{item.tone}}">{{item.value}}</view>
+      <view class="stat-label">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="info-row" wx:for="{{infoRows}}" wx:key="label">
+      <view class="info-label">{{item.label}}</view>
+      <view class="info-value ellipsis">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在加载个人信息…</view>
+
+  <view class="section-title">
+    <text>设置与支持</text>
+  </view>
+  <view class="menu-card">
+    <view class="menu-row" bindtap="refresh">
+      <view class="menu-icon">刷</view>
+      <view class="flex-1">
+        <view class="menu-title">刷新数据</view>
+        <view class="menu-sub">最近刷新：{{lastRefresh || '—'}}</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-row" bindtap="about">
+      <view class="menu-icon">关</view>
+      <view class="flex-1">
+        <view class="menu-title">关于小程序</view>
+        <view class="menu-sub">版本、接口地址与登录说明</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <button class="btn btn-danger btn-block mt-20" bindtap="logout">退出登录</button>
+
+  <view class="mine-footer">
+    <view>{{version}}</view>
+    <view class="mt-8">复用现有 Web 版后端与数据</view>
+  </view>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+<bottom-nav role="{{role}}" active="/pages/mine/mine"></bottom-nav>

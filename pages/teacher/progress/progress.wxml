@@ -1,0 +1,92 @@
+<view class="loading" wx:if="{{loading}}">正在加载测评数据…</view>
+
+<view class="page" wx:elif="{{error}}">
+  <view class="card center">
+    <view class="empty-icon">!</view>
+    <view class="bold">{{error}}</view>
+    <button class="btn btn-soft mt-28" bindtap="back">返回试卷管理</button>
+  </view>
+</view>
+
+<view class="page" wx:else>
+  <view class="progress-hero">
+    <view class="row-between">
+      <text class="pill pill-{{paper.statusTone}}">{{paper.statusLabel}}</text>
+      <text class="hero-tag">{{paper.className}}</text>
+    </view>
+    <view class="hero-title" style="margin-top: 18rpx">{{paper.name}}</view>
+    <view class="hero-sub">{{paper.questionCount}} 题 · 满分 {{paper.total}} · {{paper.timeText}}</view>
+    <view class="hero-row">
+      <view>
+        <view class="hero-number">{{stats.submitted}}</view>
+        <view class="hero-label">已交卷</view>
+      </view>
+      <view>
+        <view class="hero-number">{{stats.completion}}<text style="font-size:24rpx">%</text></view>
+        <view class="hero-label">参与率</view>
+      </view>
+      <view>
+        <view class="hero-number">{{stats.avg}}<text style="font-size:24rpx">%</text></view>
+        <view class="hero-label">平均得分率</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stat-grid mt-20">
+    <view class="stat">
+      <view class="stat-value">{{stats.expected}}</view>
+      <view class="stat-label">目标学生</view>
+    </view>
+    <view class="stat">
+      <view class="stat-value text-blue">{{stats.inProgress}}</view>
+      <view class="stat-label">作答中</view>
+    </view>
+    <view class="stat">
+      <view class="stat-value text-amber">{{stats.notStarted}}</view>
+      <view class="stat-label">未开始</view>
+    </view>
+    <view class="stat">
+      <view class="stat-value text-green">{{stats.max}}<text style="font-size:22rpx">%</text></view>
+      <view class="stat-label">最高得分率</view>
+    </view>
+  </view>
+
+  <view class="row-between mt-20 mb-20">
+    <view class="section-title" style="margin: 0">学生作答明细</view>
+    <button class="btn btn-ghost btn-sm" wx:if="{{canEnd}}" loading="{{ending}}" disabled="{{ending}}" bindtap="endPaper">结束测评</button>
+  </view>
+
+  <view class="search-box">
+    <text class="search-icon">⌕</text>
+    <input class="search-input" value="{{keyword}}" placeholder="搜索学生姓名或学号" bindinput="onSearch" />
+    <text class="small muted" wx:if="{{keyword}}" bindtap="clearSearch">清除</text>
+  </view>
+
+  <view class="report-row"
+        wx:for="{{rows}}"
+        wx:key="studentId"
+        data-attempt="{{item.attemptId}}"
+        bindtap="openReport">
+    <view class="avatar {{item.status === 'submitted' ? '' : 'avatar-amber'}}">{{item.initial}}</view>
+    <view class="flex-1">
+      <view class="row-between">
+        <view class="report-name">{{item.name}} <text class="small muted">{{item.no}}</text></view>
+        <text class="pill pill-{{item.statusTone}}">{{item.statusLabel}}</text>
+      </view>
+      <view class="report-meta">{{item.className}} · {{item.submittedText}}</view>
+      <view class="report-score" wx:if="{{item.status === 'submitted'}}">
+        <text class="score-strong">{{item.score}}<text class="small muted"> / {{item.total}}</text></text>
+        <text class="small muted">得分率 {{item.rate}}% · 用时 {{item.timeUsed}} 分钟</text>
+      </view>
+      <view class="report-score" wx:else>
+        <text class="small muted">暂无成绩</text>
+      </view>
+    </view>
+    <view class="history-arrow" wx:if="{{item.status === 'submitted'}}">›</view>
+  </view>
+
+  <view class="empty" wx:if="{{!rows.length}}">
+    <view class="empty-icon">生</view>
+    <view>{{keyword ? '没有匹配的学生' : '暂无目标学生'}}</view>
+  </view>
+</view>

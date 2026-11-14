@@ -1,0 +1,46 @@
+.teacher-progress {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.paper-action {
+  flex: none;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 23rpx;
+  font-weight: 600;
+  color: #215bd1;
+  background: #eaf1ff;
+}
+
+.log-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #edf1f7;
+}
+
+.log-row:last-child {
+  border-bottom: none;
+}
+
+.log-dot {
+  flex: none;
+  width: 14rpx;
+  height: 14rpx;
+  margin: 12rpx 16rpx 0 0;
+  border-radius: 50%;
+  background: #2f6fed;
+}
+
+.log-detail {
+  font-size: 24rpx;
+  line-height: 1.55;
+  color: #3d4b63;
+}
+
+.log-meta {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: #8b97ad;
+}

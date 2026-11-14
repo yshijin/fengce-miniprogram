@@ -1,0 +1,61 @@
+.student-links {
+  display: flex;
+  margin: 20rpx -8rpx 4rpx;
+}
+
+.student-link {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin: 0 8rpx;
+  padding: 20rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.05);
+}
+
+.student-link-icon {
+  flex: none;
+  width: 62rpx;
+  height: 62rpx;
+  margin-right: 14rpx;
+  border-radius: 18rpx;
+  line-height: 62rpx;
+  text-align: center;
+  font-size: 25rpx;
+  font-weight: 700;
+  color: #215bd1;
+  background: #eaf1ff;
+}
+
+.student-link-icon.green {
+  color: #087a58;
+  background: #e5f8f0;
+}
+
+.student-link-title {
+  font-size: 25rpx;
+  font-weight: 700;
+  color: #26344d;
+}
+
+.student-link-sub {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  color: #8b97ad;
+}
+
+.paper-action {
+  margin-left: 16rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 23rpx;
+  font-weight: 600;
+  color: #215bd1;
+  background: #eaf1ff;
+}
+
+.paper-action.muted {
+  color: #7b8aa6;
+  background: #f1f4f9;
+}
