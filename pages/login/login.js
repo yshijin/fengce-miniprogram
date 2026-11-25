@@ -39,7 +39,7 @@ Page({
       username: account.username,
       password: account.password
     });
-    wx.showToast({ title: '已填入测试账号', icon: 'none' });
+    wx.showToast({ title: '已填入演示账号', icon: 'none' });
   },
 
   submit() {

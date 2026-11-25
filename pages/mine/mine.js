@@ -12,7 +12,6 @@ Page({
     stats: [],
     infoRows: [],
     version: api.config.version,
-    baseUrl: api.config.baseUrl,
     lastRefresh: ''
   },
 
@@ -46,7 +45,7 @@ Page({
         stats = [
           { label: '负责教学班', value: classes.length, tone: 'blue' },
           { label: '班级学生', value: students.length, tone: 'green' },
-          { label: '测评试卷', value: papers.length, tone: 'amber' }
+          { label: '评测任务', value: papers.length, tone: 'amber' }
         ];
         infoRows = [
           { label: '角色', value: '教师' },
@@ -69,7 +68,7 @@ Page({
       } else {
         const remaining = boot.wrongBook ? boot.wrongBook.remaining : 0;
         stats = [
-          { label: '已完成测评', value: attempts.length, tone: 'blue' },
+          { label: '已完成评测', value: attempts.length, tone: 'blue' },
           { label: '平均得分率', value: data.avgPct(attempts) + '%', tone: 'green' },
           { label: '待掌握错题', value: remaining, tone: 'amber' }
         ];
@@ -109,8 +108,8 @@ Page({
 
   about() {
     wx.showModal({
-      title: '智学测评 · 小程序版',
-      content: '这是现有 Web 版的原生小程序端原型，复用同一套 Spring Boot 后端与数据库。\n\n小程序端使用 Bearer Token 登录，Web 端 HttpSession 不受影响。\n\n当前接口地址：' + this.data.baseUrl,
+      title: '关于锋测',
+      content: '锋测是一套面向教学场景的知识诊断与能力评估工具。\n\n登录状态仅在当前设备有效，学习与评测数据由服务端安全保存。\n\n版本：' + this.data.version,
       showCancel: false,
       confirmText: '知道了'
     });

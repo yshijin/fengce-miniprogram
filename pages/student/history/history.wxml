@@ -1,12 +1,12 @@
 <view class="page with-nav">
   <view class="hero" wx:if="{{user}}">
     <view class="hero-tag">{{user.name}} · 学习档案</view>
-    <view class="hero-title">历史成绩</view>
-    <view class="hero-sub">每一次测评都会留下知识点掌握轨迹。</view>
+    <view class="hero-title">评测记录</view>
+    <view class="hero-sub">每一次评测都会留下知识点掌握轨迹。</view>
     <view class="hero-row">
       <view>
         <view class="hero-number">{{stats.count}}</view>
-        <view class="hero-label">已完成测评</view>
+        <view class="hero-label">已完成评测</view>
       </view>
       <view>
         <view class="hero-number">{{stats.avg}}<text style="font-size:24rpx">%</text></view>
@@ -54,9 +54,9 @@
 
     <view class="empty" wx:if="{{!attempts.length}}">
       <view class="empty-icon">绩</view>
-      <view>还没有已完成的测评</view>
-      <view class="small muted mt-8">完成一次测评后，成绩会保存在这里</view>
-      <button class="btn btn-primary btn-sm mt-20" bindtap="goHome">去完成测评</button>
+      <view>还没有已完成的评测</view>
+      <view class="small muted mt-8">完成一次评测后，成绩会保存在这里</view>
+      <button class="btn btn-primary btn-sm mt-20" bindtap="goHome">去完成评测</button>
     </view>
   </block>
 </view>

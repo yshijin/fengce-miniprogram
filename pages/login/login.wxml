@@ -3,14 +3,14 @@
   <view class="login-orb login-orb-b"></view>
 
   <view class="brand">
-    <view class="brand-mark">智</view>
-    <view class="brand-title">智学测评</view>
-    <view class="brand-sub">微信小程序版 · 保留现有 Web 版</view>
+    <view class="brand-mark">锋</view>
+    <view class="brand-title">锋测</view>
+    <view class="brand-sub">学业能力评测 · 诊断与提升</view>
   </view>
 
   <view class="login-card">
-    <view class="login-head">账号登录</view>
-    <view class="login-desc">学生、教师、课程负责人使用同一套账号</view>
+    <view class="login-head">身份验证</view>
+    <view class="login-desc">学生 / 教师 / 课程负责人统一入口</view>
 
     <view class="login-field">
       <view class="login-field-label">账号</view>
@@ -37,10 +37,10 @@
     </view>
 
     <button class="login-btn" loading="{{loading}}" disabled="{{loading}}" bindtap="submit">
-      {{loading ? '正在登录…' : '进入系统'}}
+      {{loading ? '正在登录…' : '进入工作台'}}
     </button>
 
-    <view class="quick-title">测试账号（点击填入）</view>
+    <view class="quick-title">演示账号（点击填入）</view>
     <view class="quick-row">
       <view class="quick-account"
             wx:for="{{quickAccounts}}"
@@ -53,7 +53,7 @@
     </view>
 
     <view class="login-tip">
-      小程序端使用 Bearer Token 登录；Web 端继续使用原有 HttpSession，两者互不影响。
+      登录状态仅在当前设备有效，系统会根据账号角色进入对应工作台。
     </view>
   </view>
 

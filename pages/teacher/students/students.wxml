@@ -3,7 +3,7 @@
 
   <view class="row-between mb-20">
     <view>
-      <view class="page-title">学生管理</view>
+      <view class="page-title">学员管理</view>
       <view class="page-sub">{{currentClassName}} · 共 {{totalCount}} 人</view>
     </view>
     <button class="btn btn-primary btn-sm" bindtap="openAdd">添加学生</button>
@@ -85,7 +85,7 @@
     <view class="form-label">专业</view>
     <input class="field" value="{{form.major}}" data-field="major" placeholder="例如 软件工程" bindinput="onFormInput" />
   </view>
-  <view class="hint-box">小程序端提供单个添加；批量导入、下载模板请继续使用 Web 版。</view>
+  <view class="hint-box">当前支持单个添加学生；如需批量维护，请联系教务管理员。</view>
   <button class="btn btn-primary btn-block mt-20" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submitAdd">确认添加</button>
 </view>
 

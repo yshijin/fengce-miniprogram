@@ -5,7 +5,7 @@
     <view class="empty-icon">!</view>
     <view class="bold">{{error}}</view>
     <button class="btn btn-primary mt-28" wx:if="{{canRetrySubmit}}" loading="{{submitting}}" disabled="{{submitting}}" bindtap="retrySubmit">重新交卷</button>
-    <button class="btn btn-soft mt-20" bindtap="exit">返回我的测试</button>
+    <button class="btn btn-soft mt-20" bindtap="exit">返回评测任务</button>
   </view>
 </view>
 

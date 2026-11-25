@@ -1,0 +1,150 @@
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.count-strip {
+  display: flex;
+  margin-bottom: 20rpx;
+  border: 2rpx solid #161616;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
+}
+
+.count-cell {
+  flex: 1;
+  padding: 16rpx 4rpx;
+  border-right: 1rpx solid #e7dec8;
+  text-align: center;
+}
+
+.count-cell:last-child {
+  border-right: none;
+}
+
+.count-value {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.count-label {
+  margin-top: 2rpx;
+  font-size: 18rpx;
+  color: #8a8069;
+}
+
+.entity-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+  padding: 20rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
+}
+
+.entity-icon {
+  flex: none;
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 16rpx;
+  border: 2rpx solid #161616;
+  background: #f5c400;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.entity-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 27rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.question-stem {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.entity-meta {
+  margin-top: 5rpx;
+  font-size: 21rpx;
+  line-height: 1.45;
+  color: #7d735f;
+}
+
+.entity-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 14rpx;
+}
+
+.entity-actions .btn {
+  flex: none;
+  width: auto;
+  min-width: 0;
+  height: 52rpx;
+  padding: 0 16rpx;
+  font-size: 20rpx;
+}
+
+.textarea {
+  width: 100%;
+  height: auto;
+  min-height: 140rpx;
+  padding: 14rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.form-row {
+  display: flex;
+  gap: 14rpx;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.option-key {
+  flex: none;
+  width: 52rpx;
+  height: 52rpx;
+  border: 2rpx solid #161616;
+  background: #f5c400;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.modal-tall {
+  max-height: 82vh;
+  overflow-y: auto;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 24rpx;
+}
+
+.modal-actions .btn {
+  flex: 1;
+  min-width: 0;
+}

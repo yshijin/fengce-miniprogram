@@ -1,9 +1,11 @@
 .exam-top-link {
-  padding: 8rpx 18rpx;
-  border-radius: 999rpx;
+  padding: 8rpx 16rpx;
+  border: 2rpx solid #f5c400;
+  border-radius: 0;
   font-size: 23rpx;
-  color: rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.13);
+  font-weight: 800;
+  color: #111111;
+  background: #f5c400;
 }
 
 .exam-progress-label {
@@ -29,5 +31,5 @@
   margin-top: 20rpx;
   text-align: center;
   font-size: 21rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }

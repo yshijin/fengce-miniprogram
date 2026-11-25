@@ -1,0 +1,174 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <view class="page-head">
+    <view>
+      <view class="page-title">题库管理</view>
+      <view class="page-sub">维护知识点与课程题目，供评测随机组卷</view>
+    </view>
+    <button class="btn btn-primary btn-sm" wx:if="{{activeTab === 'kps'}}" bindtap="openKp">新增知识点</button>
+    <button class="btn btn-primary btn-sm" wx:else bindtap="openQuestion">新增题目</button>
+  </view>
+
+  <view class="count-strip">
+    <view class="count-cell">
+      <view class="count-value">{{counts.kps}}</view>
+      <view class="count-label">知识点</view>
+    </view>
+    <view class="count-cell">
+      <view class="count-value">{{counts.questions}}</view>
+      <view class="count-label">有效题目</view>
+    </view>
+    <view class="count-cell">
+      <view class="count-value">10</view>
+      <view class="count-label">每题分值</view>
+    </view>
+  </view>
+
+  <scroll-view class="tab-row" scroll-x="{{true}}">
+    <view class="tab-item {{activeTab === 'kps' ? 'active' : ''}}" data-tab="kps" bindtap="setTab">知识点 {{counts.kps}}</view>
+    <view class="tab-item {{activeTab === 'questions' ? 'active' : ''}}" data-tab="questions" bindtap="setTab">题目 {{counts.questions}}</view>
+  </scroll-view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在加载题库…</view>
+
+  <block wx:else>
+    <block wx:if="{{activeTab === 'kps'}}">
+      <view class="entity-card" wx:for="{{kps}}" wx:key="id">
+        <view class="entity-icon">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="entity-name">{{item.name}}</view>
+            <text class="pill">{{item.questionCount}} 题</text>
+          </view>
+          <view class="entity-meta">{{item.code}} · {{item.desc}}</view>
+          <view class="entity-actions">
+            <button class="btn btn-danger btn-sm" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="removeKp">删除知识点</button>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!kps.length}}">
+        <view class="empty-icon">+</view>
+        <view>还没有知识点</view>
+        <button class="btn btn-primary btn-sm mt-20" bindtap="openKp">新增知识点</button>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="entity-card" wx:for="{{questions}}" wx:key="id">
+        <view class="entity-icon">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="entity-name question-stem">{{item.stem}}</view>
+            <text class="pill">{{item.typeLabel}}</text>
+          </view>
+          <view class="entity-meta">知识点：{{item.kpName}} · 难度 {{item.difficultyLabel}}</view>
+          <view class="entity-meta">正确答案：{{item.answer}}</view>
+          <view class="entity-actions">
+            <button class="btn btn-danger btn-sm" data-id="{{item.id}}" catchtap="removeQuestion">删除题目</button>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!questions.length}}">
+        <view class="empty-icon">+</view>
+        <view>还没有题目</view>
+        <button class="btn btn-primary btn-sm mt-20" bindtap="openQuestion">新增题目</button>
+      </view>
+    </block>
+  </block>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+
+<view class="modal-mask" wx:if="{{showKp}}" bindtap="closeAll"></view>
+<view class="modal" wx:if="{{showKp}}">
+  <view class="modal-title">新增知识点</view>
+  <view class="form-item">
+    <view class="form-label">知识点名称</view>
+    <input class="field" value="{{kpForm.name}}" data-form="kpForm" data-field="name" placeholder="例如：需求分析" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">知识点说明</view>
+    <textarea class="field textarea" value="{{kpForm.desc}}" data-form="kpForm" data-field="desc" placeholder="选填，简要说明知识点范围" bindinput="onFormInput"></textarea>
+  </view>
+  <view class="modal-actions">
+    <button class="btn btn-soft" bindtap="closeAll">取消</button>
+    <button class="btn btn-primary" loading="{{submitting}}" bindtap="submitKp">保存知识点</button>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showQuestion}}" bindtap="closeAll"></view>
+<view class="modal modal-tall" wx:if="{{showQuestion}}">
+  <view class="modal-title">新增题目</view>
+  <view class="form-item">
+    <view class="form-label">所属知识点</view>
+    <picker mode="selector" range="{{kpNames}}" value="{{kpIndex}}" bindchange="onKpPick">
+      <view class="picker-field">{{kpNames[kpIndex] || '请选择知识点'}}</view>
+    </picker>
+  </view>
+  <view class="form-row">
+    <view class="form-item flex-1">
+      <view class="form-label">题型</view>
+      <picker mode="selector" range="{{typeLabels}}" value="{{typeIndex}}" bindchange="onTypePick">
+        <view class="picker-field">{{typeLabels[typeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-item flex-1">
+      <view class="form-label">难度</view>
+      <picker mode="selector" range="{{difficultyLabels}}" value="{{difficultyIndex}}" bindchange="onDifficultyPick">
+        <view class="picker-field">{{difficultyLabels[difficultyIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="form-item">
+    <view class="form-label">题干</view>
+    <textarea class="field textarea" value="{{questionForm.stem}}" data-form="questionForm" data-field="stem" placeholder="输入完整题干" bindinput="onFormInput"></textarea>
+  </view>
+
+  <block wx:if="{{questionType !== 'judge'}}">
+    <view class="form-item">
+      <view class="form-label">选项</view>
+      <view class="option-row" wx:for="{{optionKeys}}" wx:key="*this">
+        <view class="option-key">{{item}}</view>
+        <input class="field flex-1"
+               value="{{optionValues[index]}}"
+               data-index="{{index}}"
+               placeholder="选项 {{item}} 内容"
+               bindinput="onOptionInput" />
+      </view>
+    </view>
+    <view class="form-item">
+      <view class="form-label">正确答案</view>
+      <input class="field"
+             value="{{questionForm.answer}}"
+             data-form="questionForm"
+             data-field="answer"
+             placeholder="{{questionType === 'single' ? '填 A' : '多选填 AC'}}"
+             bindinput="onFormInput" />
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="form-item">
+      <view class="form-label">正确答案</view>
+      <picker mode="selector" range="{{judgeAnswers}}" value="{{judgeAnswerIndex}}" bindchange="onJudgeAnswerPick">
+        <view class="picker-field">{{judgeAnswers[judgeAnswerIndex]}}</view>
+      </picker>
+    </view>
+  </block>
+
+  <view class="form-item">
+    <view class="form-label">解析</view>
+    <textarea class="field textarea" value="{{questionForm.analysis}}" data-form="questionForm" data-field="analysis" placeholder="选填，交卷后展示" bindinput="onFormInput"></textarea>
+  </view>
+
+  <view class="modal-actions">
+    <button class="btn btn-soft" bindtap="closeAll">取消</button>
+    <button class="btn btn-primary" loading="{{submitting}}" bindtap="submitQuestion">保存题目</button>
+  </view>
+</view>
+
+<bottom-nav role="course_leader" active="/pages/cl/bank/bank"></bottom-nav>

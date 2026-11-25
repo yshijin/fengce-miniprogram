@@ -105,6 +105,12 @@ Page({
     this.setData({ activeTab: tab });
   },
 
+  goPage(e) {
+    const url = e.currentTarget.dataset.url;
+    if (!url) return;
+    wx.reLaunch({ url: url });
+  },
+
   reload() {
     this.load(true);
   }

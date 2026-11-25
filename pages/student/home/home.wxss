@@ -9,9 +9,10 @@
   flex: 1;
   margin: 0 8rpx;
   padding: 20rpx;
-  border-radius: 24rpx;
-  background: #ffffff;
-  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.05);
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
 }
 
 .student-link-icon {
@@ -19,43 +20,46 @@
   width: 62rpx;
   height: 62rpx;
   margin-right: 14rpx;
-  border-radius: 18rpx;
-  line-height: 62rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  line-height: 58rpx;
   text-align: center;
   font-size: 25rpx;
-  font-weight: 700;
-  color: #215bd1;
-  background: #eaf1ff;
+  font-weight: 800;
+  color: #111111;
+  background: #f5c400;
 }
 
 .student-link-icon.green {
-  color: #087a58;
-  background: #e5f8f0;
+  color: #ffffff;
+  background: #216b4c;
 }
 
 .student-link-title {
   font-size: 25rpx;
   font-weight: 700;
-  color: #26344d;
+  color: #1d1d1d;
 }
 
 .student-link-sub {
   margin-top: 2rpx;
   font-size: 20rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .paper-action {
   margin-left: 16rpx;
-  padding: 8rpx 18rpx;
-  border-radius: 999rpx;
+  padding: 8rpx 16rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
   font-size: 23rpx;
-  font-weight: 600;
-  color: #215bd1;
-  background: #eaf1ff;
+  font-weight: 800;
+  color: #111111;
+  background: #f5c400;
 }
 
 .paper-action.muted {
-  color: #7b8aa6;
-  background: #f1f4f9;
+  color: #736b58;
+  background: #f2ecde;
+  border-color: #b5aa91;
 }

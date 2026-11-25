@@ -73,7 +73,7 @@ Page({
       if (!existing && status.key !== 'ongoing') {
         this.setData({
           loading: false,
-          error: status.key === 'upcoming' ? '测评尚未开始' : '测评已结束'
+          error: status.key === 'upcoming' ? '评测尚未开始' : '评测已结束'
         });
         return null;
       }

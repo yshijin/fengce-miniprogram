@@ -6,7 +6,7 @@
       <view class="page-title">数据分析</view>
       <view class="page-sub">{{currentClassName}} · 真实作答数据</view>
     </view>
-    <view class="pill pill-blue">{{stats.paperCount}} 份测评</view>
+    <view class="pill pill-blue">{{stats.paperCount}} 份评测</view>
   </view>
 
   <scroll-view class="tab-row" scroll-x="{{true}}">
@@ -27,7 +27,7 @@
       <view class="hero">
         <view class="hero-tag">{{currentClassName}}</view>
         <view class="hero-title">班级学习概览</view>
-        <view class="hero-sub">参与率按已交卷学生占比计算，平均分为各次测评得分率的平均值。</view>
+        <view class="hero-sub">参与率按已交卷学生占比计算，平均分为各次评测得分率的平均值。</view>
         <view class="hero-row">
           <view>
             <view class="hero-number">{{stats.studentCount}}</view>
@@ -55,7 +55,7 @@
         </view>
         <view class="stat">
           <view class="stat-value text-blue">{{stats.paperCount}}</view>
-          <view class="stat-label">测评数量</view>
+          <view class="stat-label">评测数量</view>
         </view>
         <view class="stat">
           <view class="stat-value text-green">{{stats.participation}}%</view>
@@ -88,7 +88,7 @@
               <text class="overview-name">{{item.name}}</text>
               <text class="pill {{item.current ? 'pill-blue' : 'pill-gray'}}" style="margin-left: 10rpx">{{item.current ? '当前' : '切换'}}</text>
             </view>
-            <view class="small muted mt-8">{{item.studentCount}} 人 · {{item.paperCount}} 份测评</view>
+            <view class="small muted mt-8">{{item.studentCount}} 人 · {{item.paperCount}} 份评测</view>
           </view>
           <view class="overview-right">
             <view class="overview-value">{{item.participation}}%</view>
@@ -122,7 +122,7 @@
       </view>
       <view class="empty" wx:if="{{!papers.length}}">
         <view class="empty-icon">数</view>
-        <view>当前教学班还没有测评数据</view>
+        <view>当前教学班还没有评测数据</view>
       </view>
     </block>
 
@@ -148,7 +148,7 @@
       </view>
       <view class="empty" wx:if="{{!reports.length}}">
         <view class="empty-icon">报</view>
-        <view>还没有已提交的测评报告</view>
+        <view>还没有已提交的评测报告</view>
       </view>
     </block>
   </block>

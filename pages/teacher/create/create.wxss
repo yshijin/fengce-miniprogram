@@ -6,14 +6,15 @@
 .count-box {
   padding: 16rpx 18rpx;
   margin-bottom: 12rpx;
-  border-radius: 18rpx;
-  background: #f7f9fd;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
 }
 
 .count-name {
   font-size: 25rpx;
-  font-weight: 600;
-  color: #3d4b63;
+  font-weight: 700;
+  color: #38352c;
 }
 
 .field-short {
@@ -26,19 +27,20 @@
   justify-content: space-around;
   padding: 24rpx 12rpx;
   margin: 24rpx 0;
-  border-radius: 22rpx;
-  background: #f7f9fd;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fff1bf;
   text-align: center;
 }
 
 .summary-value {
   font-size: 28rpx;
   font-weight: 800;
-  color: #215bd1;
+  color: #8c6500;
 }
 
 .summary-label {
   margin-top: 3rpx;
   font-size: 20rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }

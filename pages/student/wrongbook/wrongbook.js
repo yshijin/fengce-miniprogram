@@ -161,7 +161,7 @@ Page({
       }
       wx.showModal({
         title: '生成错题重练',
-        content: '尚未选择题目，是否使用全部 ' + count + ' 道待掌握错题生成测试？',
+        content: '尚未选择题目，是否使用全部 ' + count + ' 道待掌握错题生成重练任务？',
         confirmText: '生成',
         success: (res) => {
           if (!res.confirm) return;
@@ -187,7 +187,7 @@ Page({
       wx.hideLoading();
       this.setData({ generating: false });
       if (!paperId) throw new Error('生成失败，请稍后重试');
-      wx.showToast({ title: '已生成错题测试', icon: 'success' });
+      wx.showToast({ title: '已生成重练任务', icon: 'success' });
       setTimeout(() => {
         wx.navigateTo({ url: '/pages/student/exam/exam?paperId=' + encodeURIComponent(paperId) });
       }, 450);

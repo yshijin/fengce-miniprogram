@@ -1,0 +1,50 @@
+.kp-scroll {
+  height: 360rpx;
+  padding: 4rpx 0;
+}
+
+.count-box {
+  padding: 16rpx 18rpx;
+  margin-bottom: 12rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+}
+
+.count-name {
+  font-size: 25rpx;
+  font-weight: 700;
+  color: #38352c;
+}
+
+.field-short {
+  width: 150rpx;
+  text-align: center;
+}
+
+.create-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 24rpx 12rpx;
+  margin: 24rpx 0;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fff1bf;
+  text-align: center;
+}
+
+.summary-value {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #8c6500;
+}
+
+.summary-label {
+  margin-top: 3rpx;
+  font-size: 20rpx;
+  color: #8a8069;
+}
+
+.picker-field {
+  margin-top: 8rpx;
+}

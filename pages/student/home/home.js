@@ -65,7 +65,7 @@ Page({
             view.actionLabel = '继续作答';
           } else {
             view.action = 'start';
-            view.actionLabel = '开始测评';
+            view.actionLabel = '开始评测';
           }
           ongoing.push(view);
         } else if (status.key === 'upcoming') {
@@ -100,7 +100,7 @@ Page({
       const hour = new Date().getHours();
       const greeting = hour < 12 ? '早上好' : (hour < 18 ? '下午好' : '晚上好');
       const sections = [
-        { key: 'ongoing', title: '进行中的测评', items: ongoing },
+        { key: 'ongoing', title: '进行中的评测', items: ongoing },
         { key: 'upcoming', title: '即将开始', items: upcoming },
         { key: 'ended', title: '已结束', items: ended.slice(0, 8) }
       ];
@@ -137,10 +137,10 @@ Page({
       return;
     }
     if (action === 'wait') {
-      wx.showToast({ title: '测评尚未开始', icon: 'none' });
+      wx.showToast({ title: '评测尚未开始', icon: 'none' });
       return;
     }
-    wx.showToast({ title: '该测评已结束', icon: 'none' });
+    wx.showToast({ title: '该评测已结束', icon: 'none' });
   },
 
   goHistory() {

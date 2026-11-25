@@ -2,7 +2,7 @@
   <view class="hero" wx:if="{{user}}">
     <view class="hero-tag">错题本 · 按知识点重练</view>
     <view class="hero-title">把错题变成得分点</view>
-    <view class="hero-sub">从真实作答中自动收集错题，支持选择题目生成个人重练测试。</view>
+    <view class="hero-sub">从真实作答中自动收集错题，支持选择题目生成个人重练任务。</view>
     <view class="hero-row">
       <view>
         <view class="hero-number">{{summary.remaining}}</view>
@@ -94,7 +94,7 @@
     <view class="empty" wx:if="{{!entries.length}}">
       <view class="empty-icon">✓</view>
       <view>{{filter === 'corrected' ? '还没有已纠正的错题' : (filter === 'remaining' ? '当前没有待掌握错题' : '错题本还是空的')}}</view>
-      <view class="small muted mt-8">完成测评后，错题会自动收录</view>
+      <view class="small muted mt-8">完成评测后，错题会自动收录</view>
     </view>
   </block>
 </view>

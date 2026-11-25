@@ -35,7 +35,7 @@ Page({
       this.setData({ loading: false, error: '缺少作答记录编号' });
       return;
     }
-    wx.setNavigationBarTitle({ title: this.mode === 'teacher' ? '学生报告' : '测评结果' });
+    wx.setNavigationBarTitle({ title: this.mode === 'teacher' ? '学生报告' : '评测结果' });
     this.load();
   },
 
@@ -91,7 +91,7 @@ Page({
       if (!submitted) policyText = '交卷后可查看答案和解析';
       else if (this.mode === 'teacher') policyText = '教师视角：答案和解析已开放';
       else if (policy === 'never') policyText = '本试卷未开放答案查看';
-      else if (policy === 'afterEnd' && !afterEnd) policyText = '测评结束后可查看答案和解析';
+      else if (policy === 'afterEnd' && !afterEnd) policyText = '评测结束后可查看答案和解析';
       else policyText = '答案和解析已开放';
 
       this.setData({

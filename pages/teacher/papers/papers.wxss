@@ -1,18 +1,20 @@
 .page-title {
+  padding-left: 14rpx;
+  border-left: 8rpx solid #f5c400;
   font-size: 36rpx;
   font-weight: 800;
-  color: #17233d;
+  color: #161616;
 }
 
 .page-sub {
   margin-top: 4rpx;
   font-size: 22rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .paper-data {
   padding: 18rpx 0 4rpx;
-  border-top: 1rpx solid #edf1f7;
+  border-top: 1rpx solid #e7dec8;
 }
 
 .paper-actions {

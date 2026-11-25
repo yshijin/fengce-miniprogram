@@ -1,20 +1,22 @@
 .page-title {
+  padding-left: 14rpx;
+  border-left: 8rpx solid #f5c400;
   font-size: 36rpx;
   font-weight: 800;
-  color: #17233d;
+  color: #161616;
 }
 
 .page-sub {
   margin-top: 4rpx;
   font-size: 22rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .overview-row {
   display: flex;
   align-items: center;
   padding: 18rpx 0;
-  border-bottom: 1rpx solid #edf1f7;
+  border-bottom: 1rpx solid #e7dec8;
 }
 
 .overview-row:last-child {
@@ -34,19 +36,20 @@
 .overview-value {
   font-size: 27rpx;
   font-weight: 800;
-  color: #215bd1;
+  color: #8c6500;
 }
 
 .paper-data {
   padding-top: 14rpx;
-  border-top: 1rpx solid #edf1f7;
+  border-top: 1rpx solid #e7dec8;
 }
 
 .paper-action-row {
   margin-top: 16rpx;
   text-align: right;
   font-size: 22rpx;
-  color: #2f6fed;
+  font-weight: 800;
+  color: #8c6500;
 }
 
 .report-row {
@@ -54,9 +57,10 @@
   align-items: center;
   padding: 22rpx;
   margin-bottom: 14rpx;
-  border-radius: 24rpx;
-  background: #ffffff;
-  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.045);
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
 }
 
 .report-name {
@@ -67,19 +71,19 @@
 .report-meta {
   margin-top: 3rpx;
   font-size: 20rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .score-strong {
   margin-right: 16rpx;
   font-size: 30rpx;
   font-weight: 800;
-  color: #215bd1;
+  color: #8c6500;
 }
 
 .history-arrow {
   flex: none;
   margin-left: 10rpx;
   font-size: 36rpx;
-  color: #c2cbd9;
+  color: #c9bea4;
 }

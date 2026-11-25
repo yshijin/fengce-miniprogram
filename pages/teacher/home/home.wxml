@@ -2,7 +2,7 @@
   <class-switcher classes="{{classes}}" current="{{currentClassId}}" bind:change="onClassChange"></class-switcher>
 
   <view class="hero">
-    <view class="hero-tag">{{courseName}} · 教师工作台</view>
+    <view class="hero-tag">{{courseName}} · 教学控制台</view>
     <view class="hero-title">{{user.name}}，{{currentClassName}}</view>
     <view class="hero-sub">班级数据按当前教学班实时筛选，可在上方切换教学班。</view>
     <view class="hero-row">
@@ -12,7 +12,7 @@
       </view>
       <view>
         <view class="hero-number">{{stats.paperCount}}</view>
-        <view class="hero-label">测评数量</view>
+        <view class="hero-label">评测数量</view>
       </view>
       <view>
         <view class="hero-number">{{stats.participation}}<text style="font-size:24rpx">%</text></view>
@@ -46,24 +46,24 @@
   <view class="quick-grid">
     <view class="quick-item" bindtap="goStudents">
       <view class="quick-icon">生</view>
-      <view class="quick-label">学生管理</view>
+      <view class="quick-label">学员管理</view>
     </view>
     <view class="quick-item" bindtap="goPapers">
       <view class="quick-icon">卷</view>
-      <view class="quick-label">试卷管理</view>
+      <view class="quick-label">任务管理</view>
     </view>
     <view class="quick-item" bindtap="goCreate">
       <view class="quick-icon">+</view>
-      <view class="quick-label">创建测试</view>
+      <view class="quick-label">发起评测</view>
     </view>
     <view class="quick-item" bindtap="goData">
       <view class="quick-icon">数</view>
-      <view class="quick-label">数据统计</view>
+      <view class="quick-label">学情分析</view>
     </view>
   </view>
 
   <view class="section-title">
-    <text>最近测评</text>
+    <text>最近任务</text>
     <text class="more" bindtap="goPapers">全部 ›</text>
   </view>
 
@@ -97,9 +97,9 @@
     </view>
 
     <view class="empty" wx:if="{{!recentPapers.length}}">
-      <view class="empty-icon">卷</view>
-      <view>当前教学班还没有测评</view>
-      <button class="btn btn-primary btn-sm mt-20" bindtap="goCreate">创建第一场测试</button>
+      <view class="empty-icon">评</view>
+      <view>当前教学班还没有评测</view>
+      <button class="btn btn-primary btn-sm mt-20" bindtap="goCreate">发起第一场评测</button>
     </view>
 
     <view class="section-title" wx:if="{{logs.length}}">

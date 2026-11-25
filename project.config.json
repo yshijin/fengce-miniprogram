@@ -1,5 +1,5 @@
 {
-  "description": "智学测评微信小程序版",
+  "description": "锋测学业能力评测",
   "packOptions": {
     "ignore": []
   },
@@ -14,6 +14,6 @@
   "compileType": "miniprogram",
   "libVersion": "3.7.12",
   "appid": "touristappid",
-  "projectname": "zhixue-miniprogram",
+  "projectname": "fengce-miniprogram",
   "condition": {}
 }

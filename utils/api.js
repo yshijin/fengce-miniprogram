@@ -216,6 +216,57 @@ function addStudent(payload) {
   return request('/api/students', { method: 'POST', data: payload });
 }
 
+function addCourse(payload) {
+  return request('/api/courses', { method: 'POST', data: payload });
+}
+
+function deleteCourse(id) {
+  return request('/api/courses/' + encodeURIComponent(id), { method: 'DELETE' });
+}
+
+function addTeacher(payload) {
+  return request('/api/teachers', { method: 'POST', data: payload });
+}
+
+function resetTeacherPassword(id) {
+  return request('/api/teachers/' + encodeURIComponent(id) + '/reset-password', {
+    method: 'POST',
+    data: {}
+  });
+}
+
+function deleteTeacher(id) {
+  return request('/api/teachers/' + encodeURIComponent(id), { method: 'DELETE' });
+}
+
+function addClass(payload) {
+  return request('/api/classes', { method: 'POST', data: payload });
+}
+
+function deleteClass(id) {
+  return request('/api/classes/' + encodeURIComponent(id), { method: 'DELETE' });
+}
+
+function deleteStudent(id) {
+  return request('/api/students/' + encodeURIComponent(id), { method: 'DELETE' });
+}
+
+function addKp(payload) {
+  return request('/api/kps', { method: 'POST', data: payload });
+}
+
+function deleteKp(id) {
+  return request('/api/kps/' + encodeURIComponent(id), { method: 'DELETE' });
+}
+
+function addQuestion(payload) {
+  return request('/api/questions', { method: 'POST', data: payload });
+}
+
+function deleteQuestion(id) {
+  return request('/api/questions/' + encodeURIComponent(id), { method: 'DELETE' });
+}
+
 function homeFor(role) {
   if (role === 'teacher') return '/pages/teacher/home/home';
   if (role === 'course_leader') return '/pages/cl/home/home';
@@ -248,6 +299,18 @@ module.exports = {
   endPaper: endPaper,
   deletePaper: deletePaper,
   addStudent: addStudent,
+  addCourse: addCourse,
+  deleteCourse: deleteCourse,
+  addTeacher: addTeacher,
+  resetTeacherPassword: resetTeacherPassword,
+  deleteTeacher: deleteTeacher,
+  addClass: addClass,
+  deleteClass: deleteClass,
+  deleteStudent: deleteStudent,
+  addKp: addKp,
+  deleteKp: deleteKp,
+  addQuestion: addQuestion,
+  deleteQuestion: deleteQuestion,
   homeFor: homeFor,
   roleName: roleName
 };

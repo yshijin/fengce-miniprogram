@@ -3,10 +3,10 @@
 
   <view class="row-between mb-20">
     <view>
-      <view class="page-title">试卷管理</view>
+      <view class="page-title">任务管理</view>
       <view class="page-sub">{{currentClassName}} · 共 {{totalCount}} 份</view>
     </view>
-    <button class="btn btn-primary btn-sm" bindtap="goCreate">创建测试</button>
+    <button class="btn btn-primary btn-sm" bindtap="goCreate">发起评测</button>
   </view>
 
   <scroll-view class="tab-row" scroll-x="{{true}}">
@@ -53,7 +53,7 @@
     <view class="empty" wx:if="{{!papers.length}}">
       <view class="empty-icon">卷</view>
       <view>当前筛选下没有试卷</view>
-      <button class="btn btn-primary btn-sm mt-20" bindtap="goCreate">创建测试</button>
+      <button class="btn btn-primary btn-sm mt-20" bindtap="goCreate">发起评测</button>
     </view>
   </block>
 </view>

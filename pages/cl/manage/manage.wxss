@@ -1,0 +1,171 @@
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 6rpx 0 20rpx;
+}
+
+.head-stamp {
+  margin-left: 18rpx;
+  padding: 8rpx 12rpx;
+  border: 2rpx solid #161616;
+  background: #f5c400;
+  font-size: 18rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  color: #141414;
+  transform: rotate(-2deg);
+}
+
+.count-strip {
+  display: flex;
+  margin-bottom: 20rpx;
+  border: 2rpx solid #161616;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
+}
+
+.count-cell {
+  flex: 1;
+  padding: 16rpx 4rpx;
+  border-right: 1rpx solid #e7dec8;
+  text-align: center;
+}
+
+.count-cell:last-child {
+  border-right: none;
+}
+
+.count-value {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.count-label {
+  margin-top: 2rpx;
+  font-size: 18rpx;
+  color: #8a8069;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.entity-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+  padding: 20rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
+}
+
+.entity-icon {
+  flex: none;
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 16rpx;
+  border: 2rpx solid #161616;
+  background: #f5c400;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.entity-name {
+  font-size: 27rpx;
+  font-weight: 800;
+  color: #141414;
+}
+
+.entity-meta {
+  margin-top: 5rpx;
+  font-size: 21rpx;
+  line-height: 1.45;
+  color: #7d735f;
+}
+
+.entity-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 14rpx;
+}
+
+.entity-actions .btn {
+  flex: none;
+  width: auto;
+  min-width: 0;
+  height: 52rpx;
+  padding: 0 16rpx;
+  font-size: 20rpx;
+}
+
+.log-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12rpx;
+  padding: 18rpx;
+  border: 1rpx solid #ded3ba;
+  background: #fffdf7;
+}
+
+.log-dot {
+  flex: none;
+  width: 14rpx;
+  height: 14rpx;
+  margin: 8rpx 14rpx 0 0;
+  background: #f5c400;
+  border: 1rpx solid #161616;
+}
+
+.log-action {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #141414;
+}
+
+.log-detail {
+  margin-top: 4rpx;
+  font-size: 21rpx;
+  line-height: 1.45;
+  color: #5f5849;
+}
+
+.log-meta {
+  margin-top: 6rpx;
+  font-size: 19rpx;
+  color: #9a8f77;
+}
+
+.form-tip {
+  margin: 8rpx 0 4rpx;
+  padding: 12rpx 14rpx;
+  border-left: 6rpx solid #f5c400;
+  background: #faf3d7;
+  font-size: 21rpx;
+  line-height: 1.5;
+  color: #6b6250;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 24rpx;
+}
+
+.modal-actions .btn {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-box {
+  margin-bottom: 18rpx;
+}

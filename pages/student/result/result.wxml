@@ -1,4 +1,4 @@
-<view class="loading" wx:if="{{loading}}">正在生成测评报告…</view>
+<view class="loading" wx:if="{{loading}}">正在生成评测报告…</view>
 
 <view class="page" wx:elif="{{error}}">
   <view class="card center">
@@ -10,7 +10,7 @@
 
 <view class="page" wx:else>
   <view class="result-hero">
-    <view class="result-label">{{mode === 'teacher' ? '学生测评得分' : '我的测评得分'}}</view>
+    <view class="result-label">{{mode === 'teacher' ? '学生评测得分' : '我的评测得分'}}</view>
     <view class="result-score">{{attempt.score}}<text class="result-score-total"> / {{attempt.total}}</text></view>
     <view class="result-label">{{paper.name}}</view>
     <view class="result-badge">{{grade}} · 得分率 {{scoreRate}}%</view>
@@ -53,7 +53,7 @@
       <view class="kp-name ellipsis">{{item.name}}</view>
       <view class="kp-bar">
         <view class="progress">
-          <view class="progress-inner" style="width: {{item.barWidth}}%; background: {{item.color}}"></view>
+          <view class="progress-inner" style="width: {{item.barWidth}}%; background: {{item.barColor}}"></view>
         </view>
       </view>
       <view class="kp-rate" style="color: {{item.color}}">{{item.rate}}%</view>

@@ -14,14 +14,18 @@
     "pages/teacher/progress/progress",
     "pages/teacher/data/data",
     "pages/cl/home/home",
+    "pages/cl/manage/manage",
+    "pages/cl/papers/papers",
+    "pages/cl/create/create",
+    "pages/cl/bank/bank",
     "pages/mine/mine"
   ],
   "window": {
-    "navigationBarTitleText": "智学测评",
-    "navigationBarBackgroundColor": "#0b2a55",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#f3f6fb",
-    "backgroundTextStyle": "light"
+    "navigationBarTitleText": "锋测",
+    "navigationBarBackgroundColor": "#f5c400",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f4f0e3",
+    "backgroundTextStyle": "dark"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

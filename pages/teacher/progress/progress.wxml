@@ -1,10 +1,10 @@
-<view class="loading" wx:if="{{loading}}">正在加载测评数据…</view>
+<view class="loading" wx:if="{{loading}}">正在加载评测数据…</view>
 
 <view class="page" wx:elif="{{error}}">
   <view class="card center">
     <view class="empty-icon">!</view>
     <view class="bold">{{error}}</view>
-    <button class="btn btn-soft mt-28" bindtap="back">返回试卷管理</button>
+    <button class="btn btn-soft mt-28" bindtap="back">返回任务管理</button>
   </view>
 </view>
 
@@ -53,7 +53,7 @@
 
   <view class="row-between mt-20 mb-20">
     <view class="section-title" style="margin: 0">学生作答明细</view>
-    <button class="btn btn-ghost btn-sm" wx:if="{{canEnd}}" loading="{{ending}}" disabled="{{ending}}" bindtap="endPaper">结束测评</button>
+    <button class="btn btn-ghost btn-sm" wx:if="{{canEnd}}" loading="{{ending}}" disabled="{{ending}}" bindtap="endPaper">结束评测</button>
   </view>
 
   <view class="search-box">

@@ -1,0 +1,308 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <view class="page-head">
+    <view>
+      <view class="page-title">组织管理</view>
+      <view class="page-sub">课程、教学班、教师与学员的统一管理入口</view>
+    </view>
+    <view class="head-stamp">ADMIN</view>
+  </view>
+
+  <view class="count-strip">
+    <view class="count-cell">
+      <view class="count-value">{{counts.courses}}</view>
+      <view class="count-label">课程</view>
+    </view>
+    <view class="count-cell">
+      <view class="count-value">{{counts.classes}}</view>
+      <view class="count-label">教学班</view>
+    </view>
+    <view class="count-cell">
+      <view class="count-value">{{counts.teachers}}</view>
+      <view class="count-label">教师</view>
+    </view>
+    <view class="count-cell">
+      <view class="count-value">{{counts.students}}</view>
+      <view class="count-label">学员</view>
+    </view>
+    <view class="count-cell">
+      <view class="count-value">{{counts.papers}}</view>
+      <view class="count-label">评测</view>
+    </view>
+  </view>
+
+  <scroll-view class="tab-row" scroll-x="{{true}}">
+    <view class="tab-item {{activeTab === 'courses' ? 'active' : ''}}" data-tab="courses" bindtap="setTab">课程</view>
+    <view class="tab-item {{activeTab === 'classes' ? 'active' : ''}}" data-tab="classes" bindtap="setTab">教学班</view>
+    <view class="tab-item {{activeTab === 'teachers' ? 'active' : ''}}" data-tab="teachers" bindtap="setTab">教师</view>
+    <view class="tab-item {{activeTab === 'students' ? 'active' : ''}}" data-tab="students" bindtap="setTab">学员</view>
+    <view class="tab-item {{activeTab === 'logs' ? 'active' : ''}}" data-tab="logs" bindtap="setTab">日志</view>
+  </scroll-view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在加载组织数据…</view>
+
+  <block wx:else>
+    <block wx:if="{{activeTab === 'courses'}}">
+      <view class="row-between mb-20">
+        <view>
+          <view class="section-title">课程档案</view>
+          <view class="small muted">维护课程名称、编码与学期</view>
+        </view>
+        <button class="btn btn-primary btn-sm" bindtap="openCourse">新增课程</button>
+      </view>
+
+      <view class="entity-card" wx:for="{{courses}}" wx:key="id">
+        <view class="entity-icon">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="entity-name">{{item.name}}</view>
+            <text class="pill pill-green" wx:if="{{item.isCurrent}}">当前课程</text>
+            <text class="pill" wx:else>{{item.statusLabel}}</text>
+          </view>
+          <view class="entity-meta">{{item.code}} · {{item.term}}</view>
+          <view class="entity-meta">负责人 {{item.owner}} · {{item.classCount}} 个教学班</view>
+          <view class="entity-actions">
+            <button class="btn btn-danger btn-sm" wx:if="{{!item.isCurrent}}" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="removeCourse">删除课程</button>
+            <text class="small muted" wx:else>当前课程不可删除</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!courses.length}}">
+        <view class="empty-icon">+</view>
+        <view>还没有课程档案</view>
+      </view>
+    </block>
+
+    <block wx:elif="{{activeTab === 'classes'}}">
+      <view class="row-between mb-20">
+        <view>
+          <view class="section-title">教学班</view>
+          <view class="small muted">为教师分配教学班并维护班级信息</view>
+        </view>
+        <button class="btn btn-primary btn-sm" bindtap="openClass">新增教学班</button>
+      </view>
+
+      <view class="entity-card" wx:for="{{classes}}" wx:key="id">
+        <view class="entity-icon">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="entity-name">{{item.name}}</view>
+            <text class="pill">{{item.studentCount}} 人</text>
+          </view>
+          <view class="entity-meta">{{item.courseName}} · {{item.teacherName}}</view>
+          <view class="entity-meta">{{item.major}} · {{item.term}}</view>
+          <view class="entity-meta">参与度 {{item.participation}}% · {{item.paperCount}} 份评测</view>
+          <view class="entity-actions">
+            <button class="btn btn-danger btn-sm" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="removeClass">删除班级</button>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!classes.length}}">
+        <view class="empty-icon">+</view>
+        <view>还没有教学班</view>
+      </view>
+    </block>
+
+    <block wx:elif="{{activeTab === 'teachers'}}">
+      <view class="row-between mb-20">
+        <view>
+          <view class="section-title">教师账号</view>
+          <view class="small muted">新增教师后可继续为其创建教学班</view>
+        </view>
+        <button class="btn btn-primary btn-sm" bindtap="openTeacher">添加教师</button>
+      </view>
+
+      <view class="entity-card" wx:for="{{teachers}}" wx:key="id">
+        <view class="entity-icon">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="entity-name">{{item.name}}</view>
+            <text class="pill pill-green">{{item.statusLabel}}</text>
+          </view>
+          <view class="entity-meta">工号 {{item.no}} · {{item.phone}}</view>
+          <view class="entity-meta">教学班：{{item.classes}}</view>
+          <view class="entity-actions">
+            <button class="btn btn-soft btn-sm" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="resetTeacher">重置密码</button>
+            <button class="btn btn-danger btn-sm" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="removeTeacher">删除教师</button>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!teachers.length}}">
+        <view class="empty-icon">+</view>
+        <view>还没有教师账号</view>
+      </view>
+    </block>
+
+    <block wx:elif="{{activeTab === 'students'}}">
+      <view class="row-between mb-20">
+        <view>
+          <view class="section-title">学员档案</view>
+          <view class="small muted">按姓名、学号、教学班或行政班检索</view>
+        </view>
+        <button class="btn btn-primary btn-sm" bindtap="openStudent">添加学员</button>
+      </view>
+
+      <view class="search-box">
+        <text class="search-icon">⌕</text>
+        <input class="search-input"
+               value="{{keyword}}"
+               placeholder="搜索姓名、学号或班级"
+               placeholder-class="muted"
+               bindinput="onSearch" />
+        <text class="small muted" wx:if="{{keyword}}" bindtap="clearSearch">清除</text>
+      </view>
+
+      <view class="entity-card" wx:for="{{students}}" wx:key="id">
+        <view class="entity-icon">{{item.initial}}</view>
+        <view class="flex-1">
+          <view class="row-between">
+            <view class="entity-name">{{item.name}}</view>
+            <text class="pill">{{item.statusLabel}}</text>
+          </view>
+          <view class="entity-meta">学号 {{item.no}} · {{item.className}}</view>
+          <view class="entity-meta">{{item.major}} · {{item.adminClass}}</view>
+          <view class="entity-meta">已交 {{item.attemptCount}} 次 · 平均 {{item.avg}}% · 最近 {{item.lastText}}</view>
+          <view class="entity-actions">
+            <button class="btn btn-danger btn-sm" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="removeStudent">删除学员</button>
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!students.length}}">
+        <view class="empty-icon">⌕</view>
+        <view>没有匹配的学员</view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="row-between mb-20">
+        <view>
+          <view class="section-title">操作日志</view>
+          <view class="small muted">最近 100 条教学与管理操作</view>
+        </view>
+        <text class="pill">{{logs.length}} 条</text>
+      </view>
+      <view class="log-card" wx:for="{{logs}}" wx:key="id">
+        <view class="log-dot"></view>
+        <view class="flex-1">
+          <view class="log-action">{{item.action}}</view>
+          <view class="log-detail">{{item.detail}}</view>
+          <view class="log-meta">{{item.operator}} · {{item.role}} · {{item.timeText}}</view>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{!logs.length}}">
+        <view class="empty-icon">·</view>
+        <view>暂无操作日志</view>
+      </view>
+    </block>
+  </block>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+
+<view class="modal-mask" wx:if="{{showCourse}}" bindtap="closeAll"></view>
+<view class="modal" wx:if="{{showCourse}}">
+  <view class="modal-title">新增课程</view>
+  <view class="form-item">
+    <view class="form-label">课程名称</view>
+    <input class="field" value="{{courseForm.name}}" data-form="courseForm" data-field="name" placeholder="例如：软件工程基础" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">课程编码</view>
+    <input class="field" value="{{courseForm.code}}" data-form="courseForm" data-field="code" placeholder="例如：SE101" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">学期</view>
+    <input class="field" value="{{courseForm.term}}" data-form="courseForm" data-field="term" placeholder="例如：2026 秋季" bindinput="onFormInput" />
+  </view>
+  <view class="modal-actions">
+    <button class="btn btn-soft" bindtap="closeAll">取消</button>
+    <button class="btn btn-primary" loading="{{submitting}}" bindtap="submitCourse">保存课程</button>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showClass}}" bindtap="closeAll"></view>
+<view class="modal" wx:if="{{showClass}}">
+  <view class="modal-title">新增教学班</view>
+  <view class="form-item">
+    <view class="form-label">班级名称</view>
+    <input class="field" value="{{classForm.name}}" data-form="classForm" data-field="name" placeholder="例如：软工 2601 班" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">任课教师</view>
+    <picker mode="selector" range="{{teacherNames}}" value="{{teacherIndex}}" bindchange="onTeacherPick">
+      <view class="picker-field">{{teacherNames[teacherIndex] || '请选择教师'}}</view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <view class="form-label">专业</view>
+    <input class="field" value="{{classForm.major}}" data-form="classForm" data-field="major" placeholder="例如：软件工程" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">学期</view>
+    <input class="field" value="{{classForm.term}}" data-form="classForm" data-field="term" placeholder="例如：2026 秋季" bindinput="onFormInput" />
+  </view>
+  <view class="modal-actions">
+    <button class="btn btn-soft" bindtap="closeAll">取消</button>
+    <button class="btn btn-primary" loading="{{submitting}}" bindtap="submitClass">保存教学班</button>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showTeacher}}" bindtap="closeAll"></view>
+<view class="modal" wx:if="{{showTeacher}}">
+  <view class="modal-title">添加教师</view>
+  <view class="form-item">
+    <view class="form-label">工号</view>
+    <input class="field" value="{{teacherForm.no}}" data-form="teacherForm" data-field="no" placeholder="教师登录工号" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">姓名</view>
+    <input class="field" value="{{teacherForm.name}}" data-form="teacherForm" data-field="name" placeholder="教师姓名" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">联系电话</view>
+    <input class="field" value="{{teacherForm.phone}}" data-form="teacherForm" data-field="phone" placeholder="选填" bindinput="onFormInput" />
+  </view>
+  <view class="form-tip">新教师默认密码为 123456，可在教师列表中重置。</view>
+  <view class="modal-actions">
+    <button class="btn btn-soft" bindtap="closeAll">取消</button>
+    <button class="btn btn-primary" loading="{{submitting}}" bindtap="submitTeacher">添加教师</button>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showStudent}}" bindtap="closeAll"></view>
+<view class="modal" wx:if="{{showStudent}}">
+  <view class="modal-title">添加学员</view>
+  <view class="form-item">
+    <view class="form-label">所属教学班</view>
+    <picker mode="selector" range="{{classNames}}" value="{{studentClassIndex}}" bindchange="onStudentClassPick">
+      <view class="picker-field">{{classNames[studentClassIndex] || '请选择教学班'}}</view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <view class="form-label">学号</view>
+    <input class="field" value="{{studentForm.no}}" data-form="studentForm" data-field="no" placeholder="学生登录学号" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">姓名</view>
+    <input class="field" value="{{studentForm.name}}" data-form="studentForm" data-field="name" placeholder="学生姓名" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">专业</view>
+    <input class="field" value="{{studentForm.major}}" data-form="studentForm" data-field="major" placeholder="例如：软件工程" bindinput="onFormInput" />
+  </view>
+  <view class="form-item">
+    <view class="form-label">行政班</view>
+    <input class="field" value="{{studentForm.adminClass}}" data-form="studentForm" data-field="adminClass" placeholder="选填，默认使用教学班名称" bindinput="onFormInput" />
+  </view>
+  <view class="form-tip">新学员默认密码为 123456。</view>
+  <view class="modal-actions">
+    <button class="btn btn-soft" bindtap="closeAll">取消</button>
+    <button class="btn btn-primary" loading="{{submitting}}" bindtap="submitStudent">添加学员</button>
+  </view>
+</view>
+
+<bottom-nav role="course_leader" active="/pages/cl/manage/manage"></bottom-nav>

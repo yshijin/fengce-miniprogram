@@ -2,11 +2,11 @@
   <view class="hero">
     <view class="hero-tag">{{className || '我的教学班'}}</view>
     <view class="hero-title">{{greeting}}，{{user.name}}</view>
-    <view class="hero-sub">完成教师发布的测评，系统会生成知识点诊断与学习建议。</view>
+    <view class="hero-sub">完成教师发布的评测，系统会生成知识点诊断与学习建议。</view>
     <view class="hero-row">
       <view>
         <view class="hero-number">{{stats.pending}}</view>
-        <view class="hero-label">待完成测评</view>
+        <view class="hero-label">待完成评测</view>
       </view>
       <view>
         <view class="hero-number">{{stats.completed}}</view>
@@ -23,8 +23,8 @@
     <view class="student-link" bindtap="goHistory">
       <view class="student-link-icon">绩</view>
       <view>
-        <view class="student-link-title">历史成绩</view>
-        <view class="student-link-sub">查看每次测评结果</view>
+        <view class="student-link-title">评测记录</view>
+        <view class="student-link-sub">查看每次评测结果</view>
       </view>
     </view>
     <view class="student-link" bindtap="goWrongbook">
@@ -42,7 +42,7 @@
     <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
   </view>
 
-  <view class="loading" wx:elif="{{loading}}">正在加载测评…</view>
+  <view class="loading" wx:elif="{{loading}}">正在加载评测…</view>
 
   <block wx:else>
     <block wx:for="{{sections}}" wx:key="key">
@@ -67,7 +67,7 @@
           <view class="paper-bottom">
             <view class="paper-time">{{paper.timeText}}</view>
             <view class="row">
-              <view class="score-inline" wx:if="{{paper.scoreText}}">{{paper.scoreText}}<text style="font-size:22rpx;color:#7b8aa6"> 分</text></view>
+              <view class="score-inline" wx:if="{{paper.scoreText}}">{{paper.scoreText}}<text style="font-size:22rpx;color:#8f866f"> 分</text></view>
               <view class="paper-action" wx:if="{{paper.action !== 'wait'}}">{{paper.actionLabel}}</view>
               <view class="paper-action muted" wx:else>{{paper.actionLabel}}</view>
             </view>
@@ -77,14 +77,14 @@
     </block>
 
     <view class="empty" wx:if="{{!hasAny}}">
-      <view class="empty-icon">测</view>
-      <view>当前还没有面向你的测评</view>
+      <view class="empty-icon">评</view>
+      <view>当前还没有面向你的评测</view>
       <view class="small muted mt-8">教师发布后会自动出现在这里</view>
     </view>
     <view class="empty" wx:elif="{{!stats.pending && stats.completed}}">
       <view class="empty-icon green">✓</view>
-      <view>进行中的测评已全部完成</view>
-      <view class="small muted mt-8">可以查看历史成绩或错题本继续巩固</view>
+      <view>进行中的评测已全部完成</view>
+      <view class="small muted mt-8">可以查看评测记录或错题本继续巩固</view>
     </view>
   </block>
 </view>

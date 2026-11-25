@@ -3,9 +3,10 @@
   align-items: center;
   padding: 24rpx;
   margin-bottom: 18rpx;
-  border-radius: 26rpx;
-  background: #ffffff;
-  box-shadow: 0 8rpx 26rpx rgba(25, 50, 90, 0.055);
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
 }
 
 .history-score {
@@ -13,10 +14,11 @@
   width: 110rpx;
   height: 110rpx;
   margin-right: 22rpx;
-  border-radius: 24rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
   text-align: center;
-  color: #215bd1;
-  background: #eaf1ff;
+  color: #111111;
+  background: #f5c400;
 }
 
 .history-score-value {
@@ -28,22 +30,22 @@
 
 .history-score-total {
   font-size: 20rpx;
-  color: #7b8aa6;
+  color: #736b58;
 }
 
 .history-amber {
-  color: #a65c00;
-  background: #fff4df;
+  color: #111111;
+  background: #f5c400;
 }
 
 .history-red {
-  color: #c32d33;
-  background: #ffecec;
+  color: #b33a32;
+  background: #f7e5e1;
 }
 
 .history-green {
-  color: #087a58;
-  background: #e5f8f0;
+  color: #ffffff;
+  background: #216b4c;
 }
 
 .history-name {
@@ -55,12 +57,12 @@
 .history-meta {
   margin-top: 6rpx;
   font-size: 21rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .history-arrow {
   flex: none;
   margin-left: 12rpx;
   font-size: 38rpx;
-  color: #c2cbd9;
+  color: #c9bea4;
 }

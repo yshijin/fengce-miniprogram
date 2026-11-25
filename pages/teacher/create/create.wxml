@@ -11,13 +11,13 @@
 <view class="page" wx:else>
   <view class="hero">
     <view class="hero-tag">按知识点随机组卷</view>
-    <view class="hero-title">创建一场小程序测试</view>
-    <view class="hero-sub">选择教学班和知识点，小程序端按题型随机抽题并立即发布。</view>
+    <view class="hero-title">发起一场能力评测</view>
+    <view class="hero-sub">选择教学班和知识点，系统按题型随机抽题并即时发布。</view>
   </view>
 
   <view class="form-card mt-20">
     <view class="form-item">
-      <view class="form-label">测试名称</view>
+      <view class="form-label">评测名称</view>
       <input class="field"
              value="{{form.name}}"
              data-field="name"
@@ -126,7 +126,7 @@
       </view>
       <view>
         <view class="summary-value">{{summary.score}} 分</view>
-        <view class="summary-label">试卷满分</view>
+        <view class="summary-label">任务满分</view>
       </view>
       <view>
         <view class="summary-value">{{summary.classCount}} 个</view>
@@ -134,11 +134,11 @@
       </view>
     </view>
 
-    <view class="hint-box">小程序端采用知识点随机抽题；更复杂的组卷规则、题目预览和批量编辑请使用 Web 版。</view>
+    <view class="hint-box">系统按知识点随机抽题，适合快速发起阶段性检测；更复杂的组卷规则请在管理端处理。</view>
 
     <button class="btn btn-primary btn-block mt-20"
             loading="{{publishing}}"
             disabled="{{publishing}}"
-            bindtap="publish">发布测试</button>
+            bindtap="publish">发布评测</button>
   </view>
 </view>

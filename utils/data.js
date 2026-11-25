@@ -302,7 +302,8 @@ function kpStatsForAttempt(boot, paper, attempt) {
     row.rate = row.total ? Math.round(row.correct / row.total * 100) : 0;
     row.barWidth = Math.max(row.rate, 5);
     row.tone = row.rate < 60 ? 'red' : (row.rate < 80 ? 'amber' : 'green');
-    row.color = row.rate < 60 ? '#e5484d' : (row.rate < 80 ? '#f59e0b' : '#0f9f6e');
+    row.color = '#141414';
+    row.barColor = row.rate < 60 ? '#141414' : (row.rate < 80 ? '#b38a00' : '#f5c400');
     return row;
   }).sort(function (a, b) { return a.rate - b.rate; });
 }

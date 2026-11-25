@@ -122,13 +122,13 @@ Page({
     const id = e.currentTarget.dataset.id;
     if (!id) return;
     wx.showModal({
-      title: '结束测评',
+      title: '结束评测',
       content: '结束后学生将不能继续作答，确定结束吗？',
       confirmText: '结束',
       success: (res) => {
         if (!res.confirm) return;
         api.endPaper(id).then(() => {
-          wx.showToast({ title: '已结束测评', icon: 'success' });
+          wx.showToast({ title: '已结束评测', icon: 'success' });
           return this.load(true);
         }).catch((err) => {
           wx.showModal({ title: '操作失败', content: err.message || '请稍后重试', showCancel: false });

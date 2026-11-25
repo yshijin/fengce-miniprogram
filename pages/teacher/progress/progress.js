@@ -71,7 +71,7 @@ Page({
         canEnd: status.key === 'ongoing'
       });
     }).catch((err) => {
-      this.setData({ loading: false, error: err.message || '加载测评数据失败' });
+      this.setData({ loading: false, error: err.message || '加载评测数据失败' });
     });
   },
 
@@ -98,14 +98,14 @@ Page({
   endPaper() {
     if (this.data.ending || !this.data.canEnd) return;
     wx.showModal({
-      title: '结束测评',
+      title: '结束评测',
       content: '结束后学生将不能继续作答，确定结束吗？',
       confirmText: '结束',
       success: (res) => {
         if (!res.confirm) return;
         this.setData({ ending: true });
         api.endPaper(this.data.paper.id).then(() => {
-          wx.showToast({ title: '已结束测评', icon: 'success' });
+          wx.showToast({ title: '已结束评测', icon: 'success' });
           this.setData({ ending: false });
           return this.load();
         }).catch((err) => {

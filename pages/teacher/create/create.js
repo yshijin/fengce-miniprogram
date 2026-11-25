@@ -163,7 +163,7 @@ Page({
 
   defaultName() {
     const d = new Date();
-    return '小程序测评 · ' + data.pad2(d.getMonth() + 1) + '-' + data.pad2(d.getDate()) +
+    return '锋测 · ' + data.pad2(d.getMonth() + 1) + '-' + data.pad2(d.getDate()) +
       ' ' + data.pad2(d.getHours()) + ':' + data.pad2(d.getMinutes());
   },
   publish() {

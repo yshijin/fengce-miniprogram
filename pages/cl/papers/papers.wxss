@@ -1,0 +1,44 @@
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+  padding: 14rpx 16rpx;
+  border: 2rpx solid #161616;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
+}
+
+.filter-label {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #8a8069;
+}
+
+.filter-picker {
+  padding: 8rpx 14rpx;
+  border: 1rpx solid #161616;
+  background: #f5c400;
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #141414;
+}
+
+.paper-data {
+  padding: 18rpx 0 4rpx;
+  border-top: 1rpx solid #e7dec8;
+}
+
+.paper-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10rpx;
+  margin-top: 20rpx;
+}

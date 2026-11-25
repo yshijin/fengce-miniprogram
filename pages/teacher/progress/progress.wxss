@@ -1,13 +1,28 @@
 .progress-hero {
+  position: relative;
+  overflow: hidden;
   padding: 30rpx 28rpx;
-  border-radius: 30rpx;
+  border: 2rpx solid #161616;
+  border-radius: 0;
   color: #ffffff;
-  background: linear-gradient(135deg, #0a2854, #1858a8 62%, #0b7f83);
+  background: #141414;
+  box-shadow: 8rpx 8rpx 0 #f5c400;
+}
+
+.progress-hero::after {
+  content: "";
+  position: absolute;
+  width: 150rpx;
+  height: 300rpx;
+  right: -100rpx;
+  top: -110rpx;
+  transform: rotate(24deg);
+  background: #f5c400;
 }
 
 .progress-hero .hero-tag {
-  color: rgba(255, 255, 255, 0.82);
-  background: rgba(255, 255, 255, 0.14);
+  color: #111111;
+  background: #f5c400;
 }
 
 .report-row {
@@ -15,9 +30,10 @@
   align-items: center;
   padding: 22rpx;
   margin-bottom: 14rpx;
-  border-radius: 24rpx;
-  background: #ffffff;
-  box-shadow: 0 6rpx 22rpx rgba(25, 50, 90, 0.045);
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
 }
 
 .report-name {
@@ -28,7 +44,7 @@
 .report-meta {
   margin-top: 3rpx;
   font-size: 20rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .report-score {
@@ -37,24 +53,24 @@
   flex-wrap: wrap;
   margin-top: 8rpx;
   font-size: 20rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .score-strong {
   margin-right: 16rpx;
   font-size: 30rpx;
   font-weight: 800;
-  color: #215bd1;
+  color: #8c6500;
 }
 
 .report-row .avatar-amber {
-  color: #a65c00;
-  background: #fff4df;
+  color: #111111;
+  background: #f5c400;
 }
 
 .history-arrow {
   flex: none;
   margin-left: 10rpx;
   font-size: 36rpx;
-  color: #c2cbd9;
+  color: #c9bea4;
 }

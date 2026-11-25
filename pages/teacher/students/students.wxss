@@ -1,13 +1,15 @@
 .page-title {
+  padding-left: 14rpx;
+  border-left: 8rpx solid #f5c400;
   font-size: 36rpx;
   font-weight: 800;
-  color: #17233d;
+  color: #161616;
 }
 
 .page-sub {
   margin-top: 4rpx;
   font-size: 22rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .student-card {
@@ -15,9 +17,10 @@
   align-items: flex-start;
   padding: 24rpx;
   margin-bottom: 16rpx;
-  border-radius: 26rpx;
-  background: #ffffff;
-  box-shadow: 0 8rpx 26rpx rgba(25, 50, 90, 0.055);
+  border: 2rpx solid #161616;
+  border-radius: 0;
+  background: #fffdf7;
+  box-shadow: 5rpx 5rpx 0 #e2d8c0;
 }
 
 .student-name {
@@ -28,7 +31,7 @@
 .student-meta {
   margin-top: 3rpx;
   font-size: 21rpx;
-  color: #7b8aa6;
+  color: #736b58;
 }
 
 .student-stats {
@@ -36,7 +39,7 @@
   flex-wrap: wrap;
   margin-top: 10rpx;
   font-size: 20rpx;
-  color: #8b97ad;
+  color: #8a8069;
 }
 
 .student-stats text {

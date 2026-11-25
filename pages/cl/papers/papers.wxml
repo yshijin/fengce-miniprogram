@@ -1,0 +1,68 @@
+<view class="page with-nav" wx:if="{{user}}">
+  <view class="page-head">
+    <view>
+      <view class="page-title">评测任务</view>
+      <view class="page-sub">统一发布、跟踪与归档全部教学班评测</view>
+    </view>
+    <button class="btn btn-primary btn-sm" bindtap="goCreate">发起评测</button>
+  </view>
+
+  <view class="filter-bar">
+    <view class="filter-label">范围</view>
+    <picker mode="selector" range="{{classNames}}" value="{{classIndex}}" bindchange="onClassFilter">
+      <view class="filter-picker">{{classNames[classIndex]}} ▾</view>
+    </picker>
+    <text class="pill">{{totalCount}} 份</text>
+  </view>
+
+  <scroll-view class="tab-row" scroll-x="{{true}}">
+    <view class="tab-item {{filter === item.key ? 'active' : ''}}"
+          wx:for="{{tabs}}"
+          wx:key="key"
+          data-filter="{{item.key}}"
+          bindtap="setFilter">{{item.label}} {{item.count}}</view>
+  </scroll-view>
+
+  <view class="empty" wx:if="{{error}}">
+    <view class="empty-icon">!</view>
+    <view>{{error}}</view>
+    <button class="btn btn-soft btn-sm mt-20" bindtap="reload">重新加载</button>
+  </view>
+  <view class="loading" wx:elif="{{loading}}">正在加载评测…</view>
+
+  <block wx:else>
+    <view class="paper-card" wx:for="{{papers}}" wx:key="id">
+      <view class="paper-status">
+        <text class="pill pill-{{item.statusTone}}">{{item.statusLabel}}</text>
+      </view>
+      <view class="paper-name">{{item.name}}</view>
+      <view class="paper-meta">{{item.className}} · {{item.questionCount}} 题 · 满分 {{item.total}}</view>
+      <view class="paper-meta">{{item.timeText}}</view>
+
+      <view class="paper-data mt-16">
+        <view class="progress">
+          <view class="progress-inner" style="width: {{item.completion}}%"></view>
+        </view>
+        <view class="row-between mt-8">
+          <text class="small muted">已交卷 {{item.submitted}} / {{item.expected}} · {{item.completion}}%</text>
+          <text class="small muted">平均 {{item.avg}}%</text>
+        </view>
+      </view>
+
+      <view class="paper-actions">
+        <button class="btn btn-soft btn-sm" data-id="{{item.id}}" catchtap="openProgress">查看分析</button>
+        <button class="btn btn-ghost btn-sm" wx:if="{{item.canEnd}}" data-id="{{item.id}}" catchtap="endPaper">结束</button>
+        <button class="btn btn-danger btn-sm" wx:if="{{item.canDelete}}" data-id="{{item.id}}" catchtap="deletePaper">删除</button>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!papers.length}}">
+      <view class="empty-icon">卷</view>
+      <view>当前筛选下没有评测</view>
+      <button class="btn btn-primary btn-sm mt-20" bindtap="goCreate">发起评测</button>
+    </view>
+  </block>
+</view>
+
+<view class="loading" wx:else>正在加载…</view>
+<bottom-nav role="course_leader" active="/pages/cl/papers/papers"></bottom-nav>

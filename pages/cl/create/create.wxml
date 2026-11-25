@@ -1,0 +1,156 @@
+<view class="loading" wx:if="{{loading}}">正在加载组卷数据…</view>
+
+<view class="page" wx:elif="{{error}}">
+  <view class="card center">
+    <view class="empty-icon">!</view>
+    <view class="bold">{{error}}</view>
+    <button class="btn btn-soft mt-28" bindtap="reload">重新加载</button>
+  </view>
+</view>
+
+<view class="page" wx:else>
+  <view class="hero">
+    <view class="hero-tag">课程级评测发布</view>
+    <view class="hero-title">发起一场能力评测</view>
+    <view class="hero-sub">选择教学班、归属教师与知识点，系统随机抽题并即时发布。</view>
+  </view>
+
+  <view class="form-card mt-20">
+    <view class="form-item">
+      <view class="form-label">评测名称</view>
+      <input class="field"
+             value="{{form.name}}"
+             data-field="name"
+             placeholder="留空自动生成名称"
+             bindinput="onInput" />
+    </view>
+
+    <view class="form-item">
+      <view class="row-between">
+        <view class="form-label">目标教学班</view>
+        <view class="row">
+          <text class="link-text" bindtap="selectAllClasses">全选</text>
+          <text class="link-text" style="margin-left: 18rpx" bindtap="clearClasses">清空</text>
+        </view>
+      </view>
+      <view class="chip-row">
+        <view class="chip {{item.selected ? 'active' : ''}}"
+              wx:for="{{classViews}}"
+              wx:key="id"
+              data-id="{{item.id}}"
+              bindtap="toggleClass">{{item.name}} · {{item.count}}人</view>
+      </view>
+      <view class="small muted mt-8">已选 {{summary.classCount}} 个教学班</view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">归属教师</view>
+      <picker mode="selector" range="{{teacherNames}}" value="{{teacherIndex}}" bindchange="onTeacherPick">
+        <view class="picker-field">{{teacherNames[teacherIndex] || '请选择教师'}}</view>
+      </picker>
+      <view class="small muted mt-8">评测将归档到该教师名下，并用于课程级统计。</view>
+    </view>
+
+    <view class="form-item">
+      <view class="row-between">
+        <view class="form-label">知识点范围</view>
+        <view class="row">
+          <text class="link-text" bindtap="selectAllKps">全选</text>
+          <text class="link-text" style="margin-left: 18rpx" bindtap="clearKps">清空</text>
+        </view>
+      </view>
+      <scroll-view class="kp-scroll" scroll-y="{{true}}">
+        <view class="chip-row">
+          <view class="chip {{item.selected ? 'active' : ''}}"
+                wx:for="{{kpViews}}"
+                wx:key="id"
+                data-id="{{item.id}}"
+                bindtap="toggleKp">{{item.name}}</view>
+        </view>
+      </scroll-view>
+      <view class="small muted mt-8">已选 {{summary.kpCount}} 个知识点 · 题库可用 {{available.total}} 题</view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">题型数量</view>
+
+      <view class="count-row count-box">
+        <view>
+          <view class="count-name">单选题</view>
+          <view class="small muted">可用 {{available.single}} 题</view>
+        </view>
+        <view class="stepper">
+          <view class="stepper-btn" data-field="single" data-delta="-1" bindtap="adjustCount">−</view>
+          <input class="stepper-input" type="number" value="{{form.single}}" data-field="single" bindinput="onCountInput" />
+          <view class="stepper-btn" data-field="single" data-delta="1" bindtap="adjustCount">+</view>
+        </view>
+      </view>
+
+      <view class="count-row count-box">
+        <view>
+          <view class="count-name">多选题</view>
+          <view class="small muted">可用 {{available.multi}} 题</view>
+        </view>
+        <view class="stepper">
+          <view class="stepper-btn" data-field="multi" data-delta="-1" bindtap="adjustCount">−</view>
+          <input class="stepper-input" type="number" value="{{form.multi}}" data-field="multi" bindinput="onCountInput" />
+          <view class="stepper-btn" data-field="multi" data-delta="1" bindtap="adjustCount">+</view>
+        </view>
+      </view>
+
+      <view class="count-row count-box">
+        <view>
+          <view class="count-name">判断题</view>
+          <view class="small muted">可用 {{available.judge}} 题</view>
+        </view>
+        <view class="stepper">
+          <view class="stepper-btn" data-field="judge" data-delta="-1" bindtap="adjustCount">−</view>
+          <input class="stepper-input" type="number" value="{{form.judge}}" data-field="judge" bindinput="onCountInput" />
+          <view class="stepper-btn" data-field="judge" data-delta="1" bindtap="adjustCount">+</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="row-between">
+        <view>
+          <view class="form-label">作答时长</view>
+          <view class="small muted">分钟</view>
+        </view>
+        <input class="field field-short" type="number" value="{{form.duration}}" data-field="duration" bindinput="onInput" />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="row-between">
+        <view>
+          <view class="form-label">开放天数</view>
+          <view class="small muted">发布后自动截止</view>
+        </view>
+        <input class="field field-short" type="number" value="{{form.days}}" data-field="days" bindinput="onInput" />
+      </view>
+    </view>
+
+    <view class="create-summary">
+      <view>
+        <view class="summary-value">{{summary.total}} 题</view>
+        <view class="summary-label">总题数</view>
+      </view>
+      <view>
+        <view class="summary-value">{{summary.score}} 分</view>
+        <view class="summary-label">任务满分</view>
+      </view>
+      <view>
+        <view class="summary-value">{{summary.classCount}} 个</view>
+        <view class="summary-label">目标教学班</view>
+      </view>
+    </view>
+
+    <view class="hint-box">系统按知识点随机抽题，发布后学员可在任务列表中看到本次评测。</view>
+
+    <button class="btn btn-primary btn-block mt-20"
+            loading="{{publishing}}"
+            disabled="{{publishing}}"
+            bindtap="publish">发布评测</button>
+  </view>
+</view>
