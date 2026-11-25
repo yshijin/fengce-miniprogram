@@ -1,35 +1,42 @@
-# 智学测评小程序端
+# 锋测 · 微信小程序
 
-用微信开发者工具导入本目录（不是仓库根目录）：
+锋测学业能力评测小程序前端，使用原生微信小程序开发，包含学生、教师、课程负责人三类角色页面。
+
+## 目录说明
 
 ```text
-D:\xiangmuuuu-miniprogram\miniprogram
+app.js / app.json / app.wxss   全局入口与样式
+components/                    底部导航、班级切换等组件
+pages/                         登录、学生、教师、负责人页面
+utils/api.js                   接口封装
+config.js                      后端地址与品牌配置
+project.config.json            微信开发者工具项目配置
 ```
 
-## 本地联调
+## 本地调试
 
-1. 启动 8081 后端（仓库根目录）：
-
-   ```powershell
-   cd D:\xiangmuuuu-miniprogram
-   .\start-miniprogram-server.ps1
-   ```
-
-2. 在开发者工具「详情 → 本地设置」勾选「不校验合法域名……」。
-3. 保持 `config.js` 中：
+1. 准备锋测后端服务，默认地址为 `http://127.0.0.1:8081`。
+2. 用微信开发者工具导入本目录（不是导入仓库的上级目录）。
+3. 在「详情 → 本地设置」勾选「不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书」。
+4. 检查 `config.js`：
 
    ```js
    baseUrl: 'http://127.0.0.1:8081'
    ```
 
-4. 编译后用测试账号登录：
+5. 编译后使用测试账号登录：
 
    - 学生：`20260001 / 123456`
    - 教师：`zhaolin / 123456`
    - 课程负责人：`admin / 123456`
 
+> 演示账号以实际后端数据库为准；本仓库仅包含小程序前端，不包含后端、数据库和种子数据。
+
 ## 正式发布
 
-把 `config.js` 的 `baseUrl` 改成已备案的 HTTPS 域名，并在微信公众平台配置 `request` 合法域名。正式环境不能使用 `localhost`、IP 或 HTTP。
+1. 将 `config.js` 的 `baseUrl` 替换为已备案的 HTTPS 域名。
+2. 在微信公众平台「开发管理 → 开发设置 → 服务器域名」中配置 `request` 合法域名。
+3. 在 `project.config.json` 中把 `appid` 替换为自己的小程序 AppID。
+4. 通过微信开发者工具上传代码，并在微信公众平台提交审核、发布。
 
-完整说明、接口改造、已验证内容和限制见上级目录的 [MINIPROGRAM.md](../MINIPROGRAM.md)。
+正式环境不能使用 `localhost`、局域网 IP 或 HTTP。仅把代码上传到 GitHub 不会自动生成可扫码使用的小程序，仍需微信审核发布。
